@@ -1,134 +1,80 @@
 import {StatusBar} from "expo-status-bar";
 import React, {useState, useEffect} from "react";
 import {StyleSheet, Text, View, TouchableOpacity, Alert} from "react-native";
-import Loading from "./Loading";
 import * as Location from "expo-location";
+import axios from "axios";
+import Loading from "./Loading";
+import Weather from "./Weather";
 
-// const getLocation = async () => {
-//   try {
-//     const response = await Location.getForegroundPermissionsAsync();
-//     const location = await Location.getCurrentPositionAsync(options);
-//     console.log(location);
-//     console.log(response);
-//   } catch (error) {
-//     Alert.alert("Can't find you...");
-//   }
-// };
 
-// useEffect(() => {
-//   getLocation();
-// }, []);
+const API_KEY = "1eaa85bc3b419d87b8faa16def8c886e";
+
 
 export default function App() {
-  //   const [location, setLocation] = useState(null);
-  //   const [errorMsg, setErrorMsg] = useState(null);
+  
+  // const [isLoading, setIsLoading] = useState(true);
+  const [weatherData, setData] = useState(null);
+  const [yesterdayData, setYesterday] = useState(null);
 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const getWeather = async (latitude, longitude) => {
+    const date = {today:null,yesterday:null}
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
+    console.log(data)
+    setData(data);
+    date.today = Math.round(new Date().getTime() / 1000.0)
+    date.yesterday = date.today - 86400
+    const {data:{current}} = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${latitude}&lon=${longitude}&dt=${date.yesterday}&appid=${API_KEY}&units=metric`)
+    console.log(current)
+    setYesterday(current)
+    
+  }
 
   const getLocation = async () => {
     try {
-      const response = await Location.requestForegroundPermissionsAsync();
+      await Location.requestForegroundPermissionsAsync();
       const location = await Location.getCurrentPositionAsync({});
-      setLatitude(location.coords.latitude);
+      const latitude = location.coords.latitude;
+      const longitude = location.coords.longitude
+      // console.log(latitude);
+      // console.log(longitude)
 
-      setLongitude(location.coords.longitude);
-
-      console.log(latitude);
-
-      console.log(longitude);
-      setIsLoading(false);
+      getWeather(latitude, longitude);
+      // setIsLoading(true);
+      
     } catch (error) {
-      Alert.alert("Can't find you...");
+      Alert.alert("Donno where you are, Can't find you....");
     }
   };
 
+
   useEffect(() => {
     getLocation();
-  }, []);
-  // useEffect(() => {
-  //   async () => {
-  //     let {status} = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       setErrorMsg("fuck not working!!!!");
-  //       console.log(status);
-  //       return;
-  //     }
-  //     let locations = await Location.getCurrentPositionAsync({});
+    
+    
+    
+  },[]);
+ 
+  // return isLoading ? <Loading /> : <Weather temp={weatherData?Math.round(weatherData.main.temp):setIsLoading(true)}/>
+  // return yesterdayData === null ? <Loading /> : <Weather tempToday={Math.round(weatherData.main.temp)} tempYester={Math.round(yesterdayData.temp)} feelLikeToday={Math.round(weatherData.main.feels_like)} feelLikeYester={Math.round(yesterdayData.feels_like)} condition={weatherData.weather[0].main} humidity={weatherData.main.humidity}/>
+  return yesterdayData === null ? <Loading /> : <Weather today={weatherData} yesterday={yesterdayData}/>
+  // return <View>
+     
+  //    <Text>{console.log(isLoading)}</Text>
+  //   <Text>{console.log(weatherData)}</Text>
+  //   {/* <Text>{weatherData.main.temp }</Text> */}
+  //   <Text>{weatherData ?weatherData.main.temp : "nope"}</Text>
+  //  </View>
+  
+  
+  // isLoading ? <Loading /> : null
+    
+  
+  // < Weather />
+  
+  // <View>
+  //   <Text>{latitude},{longitude}</Text>
+  // </View>
+  
+  
 
-  //     setLocation(locations);
-  //     console.log(location);
-  //   };
-  // }, []);
-
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   text = JSON.stringify(location);
-  // }
-
-  //예제
-
-  //   useEffect(() => {
-  //     (async () => {
-  //       let {status} = await Location.requestForegroundPermissionsAsync();
-  //       if (status !== "granted") {
-  //         setErrorMsg("Permission to access location was denied");
-  //         return;
-  //       }
-
-  //       let location = await Location.getCurrentPositionAsync({});
-  //       setLocation(location);
-  //       console.log(location.coords.latitude);
-  //       console.log(location.coords.longitude);
-  //     })();
-  //   }, []);
-
-  //   let text = "Waiting..";
-  //   if (errorMsg) {
-  //     text = errorMsg;
-  //   } else if (location) {
-  //     text = JSON.stringify(location);
-  //   }
-
-  return isLoading ? (
-    <View style={styles.container}>
-      <Loading />
-      <Text>ㅁㄴㅇㄹ</Text>
-      <StatusBar style="auto" />
-    </View>
-  ) : null;
 }
-
-// 클래스형 컴포넌트
-// export default class extends React.Component {
-//   getLocation = async () => {
-//     try {
-//       const response = await Location.requestForegroundPermissionsAsync();
-//       const location = await Location.getCurrentPositionAsync({});
-//       console.log(location);
-//       console.log(response);
-//     } catch (error) {
-//       Alert.alert("Can't find you...");
-//     }
-//   };
-//   componentDidMount() {
-//     this.getLocation();
-//   }
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Loading />
-
-//         <StatusBar style="auto" />
-//       </View>
-//     );
-//   }
-// }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

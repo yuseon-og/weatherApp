@@ -37,3 +37,69 @@
 ----------------Location API 사용 ----------------
 
 1. expo install expo-location
+
+
+---------------------------- Location 정보 가져오기 ------------------
+
+1. expo의 location 사용법 참고하는게 첫번째
+
+2. useState로 스테이트 만들기
+   => 지속적인 변경이나 스테이트 관리가 필요한놈
+   - isLoading : 로딩여부 판단
+   - weatherData : 날씨 데이터 변경
+   나머지는 함수 내에서 변수로 사용합시다..
+
+3. getLocation 함수 만들기
+   - async await로 만들어야 함
+   -  const response = await Location.requestForegroundPermissionsAsync();
+      const location = await Location.getCurrentPositionAsync({});
+      const latitude = location.coords.latitude;
+      const longitude = location.coords.longitude
+      console.log(latitude);
+      console.log(longitude)
+
+      getWeather(latitude, longitude); // getWeather함수로 위도 경도 넘겨주기
+      setIsLoading(false);
+
+4. getWeather 함수 만들기
+   - API 가져오는것
+   async await.axios.get("/url")
+   가져온다음에 weatherData에 setData로 넣어주기
+
+5. 3번 함수를 어디서 불러오는가? useEffect
+   - 뒤에 빈 배열 넣어서 componentDidMount처럼 사용
+
+6. 가져온 데이터를 보여주는 컴포넌트 만들기(별도파일)
+   - 파라메타 1개 data 받아서 보여주는 컴포넌트 만들어
+   - 기상 상태에 따라 다른 페이지 보여줄꺼야 
+
+7. return 부분에 isLoading : ?  삼항 연산자 써서 좌표 받아왔을때만 화면 띄워줄것
+   **** useEffect사용해서 componentDidMount처럼 썻는데 문제 생김
+   - 2~3번 읽어와야 날씨 데이터 값이 들어옴
+   return isLoading ? <Loading/> : <Weather temp={temp}/>
+   이거 했을때 temp 값이 undefined로 넘어가는것에서 오류남
+   결국 isLoading은 필요 없고.... weatherData가 초기화는 NULL로 되어있는데
+   이 weatherData가 값이 생기면 즉 !==이면 Weather 에 temp= props 넣어서 보내주면 됨
+
+   => API에서 가져오는 모든 데이터는 weatherData 여기 들어오기 때문에
+      앞으로 필요한 데이터는 위와같은 형식으로 가져오면 됨
+
+--------------------Weather로 넘겼으니 Weather 처리 해봐요 ------------------
+
+1. PropTypes 써서 정의하자
+
+2. icon을 쓰려면 
+   - https://icons.expo.fyi/
+   - expo API에서 icon 검색해서 사용법 알아보기
+
+3. Gradient 배경하려면 not using CSS
+   - linearGradient :API에서 검색해서 사용
+     -> 리액트 expo 컴포넌트임
+
+4. 자바스크립트 객체 접근은 속성접근자
+   - 점 또는 괄호 표기법으로 객체의 속성에 접근가능
+
+5. condition에 따라서 아이콘/배경등 따로 주려면
+   아이콘, 배경등의 옵션을 객체로 설정해서 변수에 담기
+   weatherOption[condition프롭스].옵션변수
+   이런식으로 설정가능
