@@ -1,0 +1,42 @@
+화면 전환을 위해서 사용해야 하는 라이브러리 React Navigation
+
+튜토리얼 문서 : https://reactnavigation.org/docs/params
+
+1. 설치
+
+    - npm install @react-navigation/native
+        -> 네비게이션 사용 기본 모듈
+        -> 임포트 : import 'react-native-gesture-handler';
+
+    - expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+        -> EXPO 사용시 필요한 디펜던시들
+    
+    - npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+        -> 쌩 리엑트 네이티브 사용시 필요한 디펜던시들
+
+    ---- 여기까지 기본
+
+    - npm install @react-navigation/stack
+        -> Screen 과 Navigator 를 사용하는 라이브러리!
+        -> 임포트 : import { NavigationContainer } from '@react-navigation/native';
+                    import { createStackNavigator } from '@react-navigation/stack';
+
+
+여기까지 셋팅 후 기본개념!!!!
+
+1. App.js에서 해야할 것 / 개념정리
+ - NavigationContainer 라는 놈으로 먼저 선언해서 네비게이션 사용할 모든 내용을 감싸준다
+   -> 내부에서 네비게이션 사용가능해 진다.
+
+ - <Stack.Navigator>로 네비게이션 스택을 만들어 준다
+
+ - <Stack.Screen name="Home" component={HomeController} /> 
+   이걸로 어떤 "이름"으로 지정된 컴포넌트(다른파일)을 스크린으로 불러올꺼냐~
+
+   순서도 : 네비게이션 컨데이너 안에서 네이게이션 스택을 만들어
+            스택을 왜만드냐~ 네비게이션은 기본적으로 각 스크린(페이지)를 스택으로 생성하고 없앤다
+            이로써 뒤로가기를 하면 남아있는 것이다.
+            스택.스크린으로 어떤 이름의 스크린에 어떤 컴포넌트 매칭 해줄껀가 지정하는것
+    
+    리액트 라우트와 비슷한 상황으로 APP에서 모두 스크린 이름과 컴포넌트를 지정해줘버리는것!
+    그다음 각 스크린 이동은 각 스크린에서 따로 해야할것!
