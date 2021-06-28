@@ -16,6 +16,8 @@
 
     ---- 여기까지 기본
 
+
+!!! 스택네이베기터 사용할때!!! 
     - npm install @react-navigation/stack
         -> Screen 과 Navigator 를 사용하는 라이브러리!
         -> 임포트 : import { NavigationContainer } from '@react-navigation/native';
@@ -40,3 +42,17 @@
     
     리액트 라우트와 비슷한 상황으로 APP에서 모두 스크린 이름과 컴포넌트를 지정해줘버리는것!
     그다음 각 스크린 이동은 각 스크린에서 따로 해야할것!
+
+    ** 여기까지 스택 네비게이터
+
+
+2. 스택 말고 Tab 네비게이터를 사용하자
+
+!!! Tab 네비게이터 !!!
+
+npm install @react-navigation/bottom-tabs
+
+
+createBottomTabNavigator : 화면 하단에 위치. 다른 라우트로 전환할 수 있는 기본 기능을 가진 탭 네비게이션을 제공하는 라이브러리
+createMaterialBottomTabNavigator : 화면 하단에 위치. createBottomTabNavigator보다 많은 스타일 효과를 제공하는 라이브러리
+createMaterialTopTabNavigator : 화면 상단에 위치. createBottomTabNavigator보다 많은 스타일 효과를 제공하는 라이브러리
