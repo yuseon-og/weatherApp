@@ -50,9 +50,40 @@
 
 !!! Tab 네비게이터 !!!
 
-npm install @react-navigation/bottom-tabs
+   - 설치 : npm install @react-navigation/bottom-tabs
 
 
-createBottomTabNavigator : 화면 하단에 위치. 다른 라우트로 전환할 수 있는 기본 기능을 가진 탭 네비게이션을 제공하는 라이브러리
-createMaterialBottomTabNavigator : 화면 하단에 위치. createBottomTabNavigator보다 많은 스타일 효과를 제공하는 라이브러리
-createMaterialTopTabNavigator : 화면 상단에 위치. createBottomTabNavigator보다 많은 스타일 효과를 제공하는 라이브러리
+   - 임포트 : import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+   - 임포트(아이콘 넣는거) : import Ionicons from "react-native-vector-icons/Ionicons";
+
+    Stack과 마찬가지로 사용가능
+        - const Tab = createBottomTabNavigator();
+        - <Tab.Navigator>
+              <Tab.Screen name="Home" component={HomeController} />
+          </Tab.Navigator>
+
+    디자인 하는것
+     <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === "Home") {
+              iconName = focused ? "cloud" : "cloud-outline";
+            } else if (route.name === "Dust") {
+              iconName = focused ? "apps" : "apps-outline";
+            } else if (route.name === "Forecast") {
+              iconName = focused ? "analytics" : "analytics-outline";
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: "#0083B0",
+          inactiveTintColor: "gray",
+        }}
+      >
+      이부분에 대한 자세한 내용은 아래 링크 참고
+       - https://velog.io/@yhe228/React-NavigationTab-navigation
