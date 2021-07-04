@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  ActivityIndicator,
+} from "react-native";
 
 export default function Loading() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
+      <ActivityIndicator size="large" />
       <Text style={styles.text}>Loading....</Text>
     </View>
   );

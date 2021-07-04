@@ -1,0 +1,58 @@
+스크롤뷰를 써서 스크롤 할수 있도록 하고 / Refresh까지 할 수 있음
+
+import {  ScrollView,  RefreshControl} from "react-native";
+
+1. 그냥 스크롤뷰 쓰려면 
+   <ScrollView>
+   
+   이 안에 컴포넌트 넣으면 된다.
+
+   </ScrollView>
+
+   근데 컴포넌트 하나가 스크롤이 필요없는 크기라면
+   그 크기만큼만 딱 보여져서 미쳐버린다.
+
+   이때 
+
+   <ScrollView contentContainerStyle={styles.scrollView}>
+      이걸써서 scrollView의 스타일을 flex:1로 지정해주면 화면 꽉 찬다.
+
+
+2. 컴포넌트가 여러개고 화면을 넘어선다면 위에꺼 필요없다.
+
+3. refresh controll
+    -> 어렵다.
+
+    걍 써라
+
+export 하는 함수 외부에
+// refreshControll 위한 함수
+const wait = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
+
+export 하는 함수 내부에
+
+  // refreshControll 위한 state
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  // refreshControll 위한 내용
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getLocation(); -------------------------------------------> 이놈이 refreshe 할때 무슨 동작 할꺼냐 이다.
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
+
+     <ScrollView
+      contentContainerStyle={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+    여기에 컴포넌트 넣고
+    </ScrollView>
+  
+

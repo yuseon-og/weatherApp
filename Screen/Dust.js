@@ -2,11 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Dust({ air }) {
-  console.log(air);
+  console.log(air.component);
+  console.log(air.co);
   console.log(air.co);
 
   return (
     <View style={styles.container}>
+      <Text>Total : {air.main.aqi}</Text>
       <Text>CO : {air.co}</Text>
       <Text>NH3 : {air.nh3}</Text>
       <Text>NO : {air.no}</Text>

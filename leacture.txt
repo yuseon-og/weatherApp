@@ -103,3 +103,16 @@
    아이콘, 배경등의 옵션을 객체로 설정해서 변수에 담기
    weatherOption[condition프롭스].옵션변수
    이런식으로 설정가능
+
+
+** retrun문 내에서 map 함수로 반복이 되지 않는다.
+
+return 문 밖에서 map하고 map안에 return 문을 넣고 컴포넌트를 리턴해라
+
+const map함수 쓰는 컴포넌트 = ...
+
+return(
+   컴포넌트
+   컴포넌트
+   {map함수 쓰는 컴포넌트}
+)

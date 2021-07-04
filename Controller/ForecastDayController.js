@@ -3,24 +3,26 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import * as Location from "expo-location";
 import axios from "axios";
 import LoadingBetween from "../Screen/LoadingBetween";
-import Dust from "../Screen/Dust";
+import ForecastDay from "../Screen/ForecastDay";
 
 const API_KEY = "1eaa85bc3b419d87b8faa16def8c886e";
 
-export default function Air_pollution() {
+export default function Daily() {
   // const [isLoading, setIsLoading] = useState(true);
-  const [airData, setAirData] = useState(null);
+  const [dailyData, setDailyData] = useState(null);
 
   const getWeather = async (latitude, longitude) => {
     const {
-      data: { list },
+      data: { daily },
     } = await axios.get(
-      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
-    console.log(list[0]);
+    console.log(daily);
+    // console.log(daily[0]);
+    // console.log(daily[0].dt);
     // console.log(list[0].components.co);
 
-    setAirData(list[0]);
+    setDailyData(daily);
   };
 
   const getLocation = async () => {
@@ -43,7 +45,11 @@ export default function Air_pollution() {
     getLocation();
   }, []);
 
-  return airData === null ? <LoadingBetween /> : <Dust air={airData} />;
+  return dailyData === null ? (
+    <LoadingBetween />
+  ) : (
+    <ForecastDay day={dailyData} />
+  );
 }
 
 //   return Data === null ? (
