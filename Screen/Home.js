@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { Ionicons, MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 
 const weatherOption = {
   Thunderstorm: {
@@ -60,6 +59,10 @@ const weatherOption = {
 // Clear : 맑음 ok
 // Clouds : 흐림 ok
 
+const image = {
+  uri: "https://cdn.pixabay.com/photo/2014/12/15/17/16/night-sky-569319_960_720.jpg",
+};
+
 export default function Weather({ today, yesterday }) {
   // console.log(today)
   // console.log(yesterday)
@@ -74,47 +77,50 @@ export default function Weather({ today, yesterday }) {
 
   return (
     <>
-      <LinearGradient colors={["#0083b0", "#00b4db"]} style={styles.container}>
-        <View style={styles.halfContainer1}>
-          <MaterialCommunityIcons
-            name={weatherOption[today.weather[0].main].icon}
-            size={96}
-            color="white"
-          />
-          <Text style={styles.condition}>
-            {today.weather[0].main} /{" "}
-            <Text style={styles.temp}>{Math.round(today.main.temp)}º / </Text>
-            <Text style={styles.humidity}>{today.main.humidity}%</Text>
-          </Text>
-        </View>
-        <View style={styles.halfContainer2}>
-          <View style={[styles.halfContainer, styles.textContainer]}>
-            <Text style={styles.yesterday}>
-              어제는 /{" "}
-              <Text style={styles.yesterday}>
-                {Math.round(yesterday.temp)}º /{" "}
-              </Text>
-              <Text style={styles.yesterday}>{yesterday.humidity}%</Text>
-            </Text>
-            <Text style={styles.tempDscription}>
-              온도가{" "}
-              {tempGap === 0
-                ? "어제와 같아요"
-                : tempGap > 0
-                ? `어제보다 ${tempGap}도 높아요`
-                : `어제보다 ${tempGap}도 낮아요`}
-            </Text>
-            <Text style={styles.humidityDscription}>
-              습도가{" "}
-              {humidGap === 0
-                ? "어제와 같아요"
-                : humidGap > 0
-                ? `어제보다 ${humidGap}% 높아요`
-                : `어제보다 ${-humidGap}% 낮아요`}
+      <View style={styles.container}>
+        <ImageBackground source={image} style={styles.image}>
+          <View style={styles.halfContainer1}>
+            <MaterialCommunityIcons
+              name={weatherOption[today.weather[0].main].icon}
+              size={96}
+              color="white"
+            />
+            <Text style={styles.condition}>
+              {today.weather[0].main} /{" "}
+              <Text style={styles.temp}>{Math.round(today.main.temp)}º / </Text>
+              <Text style={styles.humidity}>{today.main.humidity}%</Text>
             </Text>
           </View>
-        </View>
-      </LinearGradient>
+          <View style={styles.halfContainer2}>
+            <View style={[styles.halfContainer, styles.textContainer]}>
+              <Text style={styles.yesterday}>
+                어제는 /{" "}
+                <Text style={styles.yesterday}>
+                  {Math.round(yesterday.temp)}º /{" "}
+                </Text>
+                <Text style={styles.yesterday}>{yesterday.humidity}%</Text>
+              </Text>
+              <Text style={styles.tempDscription}>
+                온도가{" "}
+                {tempGap === 0
+                  ? "어제와 같아요"
+                  : tempGap > 0
+                  ? `어제보다 ${tempGap}도 높아요`
+                  : `어제보다 ${tempGap}도 낮아요`}
+              </Text>
+              <Text style={styles.humidityDscription}>
+                습도가{" "}
+                {humidGap === 0
+                  ? "어제와 같아요"
+                  : humidGap > 0
+                  ? `어제보다 ${humidGap}% 높아요`
+                  : `어제보다 ${-humidGap}% 낮아요`}
+              </Text>
+            </View>
+          </View>
+          {/* </LinearGradient> */}
+        </ImageBackground>
+      </View>
     </>
   );
 }
@@ -175,6 +181,11 @@ const styles = StyleSheet.create({
   textContainer: {
     paddingHorizontal: 20,
     alignItems: "flex-start",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
 });
 
