@@ -7,31 +7,28 @@ import {
   SafeAreaView,
   RefreshControl,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient} from "expo-linear-gradient";
 import CompareView from "./View/CompareView";
 
-// refreshControll 위한 함수
-// const wait = (timeout) => {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, timeout);
-//   });
-// };
-
-export default function Forecast({ today, yesterday }) {
-  // refreshControll 위한 state
-  // const [refreshing, setRefreshing] = React.useState(false);
-
-  // refreshControll 위한 내용
-  // const onRefresh = React.useCallback(() => {
-  //   setRefreshing(true);
-  //   wait(2000).then(() => setRefreshing(false));
-  // }, []);
-
+export default function Forecast({today, yesterday, yesterday2}) {
   //여기서 부터  어제와 오늘 비교하는 내용
   // console.log(today);
-  // console.log(yesterday);
+  // console.log(yesterday.hourly);
+  // console.log(yesterday2);
+
+  // 09시 이전이라면 yesterday2데이터가 있고 이후라면 빈배열
+  // 이 둘을 합쳐서 09시 이전이라면 전전날09시~전날08시 + 전날 09시~당일 08시까지 배열만듦
+  // 09시 이후라면 전날 09시~당일 08시까지배열만 반환
+
+  const yesterdayArray = [...(yesterday.hourly || []), ...(yesterday2 || [])];
+
+  console.log(yesterdayArray);
   const todayHourly = today.hourly;
-  const yesterdayHourly = yesterday.hourly.filter(function (element) {
+
+  //1일전 데이터에서 현재시간기준으로 해야하니까
+  // 현재시간기준 1일전보다 큰것만 반환하는 새로운 배열 만들기
+
+  const yesterdayHourly = yesterdayArray.filter(function (element) {
     return element.dt >= yesterday.current.dt;
   });
   // console.log(yesterdayHourly);

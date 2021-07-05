@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
-import { Ionicons, MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
+import {View, Text, StyleSheet, ImageBackground} from "react-native";
+import {Ionicons, MaterialCommunityIcons, Fontisto} from "@expo/vector-icons";
 
 const weatherOption = {
   Thunderstorm: {
     icon: "weather-lightning-rainy",
-    color: ["#141517", "#fffc00"],
   },
-  Drizzle: { icon: "weather-rainy", color: ["#3a7bd5", "#00d2ff"] },
-  Rain: { icon: "weather-pouring", color: ["#000046", "#1cb5e0"] },
-  Snow: { icon: "weather-snowy-heavy", color: ["#00416a", "#e4e5e6"] },
-  Mist: { icon: "weather-hail", color: ["#8e9eab", "#eef2f3"] },
-  Smoke: { icon: "weather-fog", color: ["#304352", "#d7d2cc"] },
-  Haze: { icon: "weather-hazy", color: ["#8e9eab", "#eef2f3"] },
-  Dust: { icon: "weather-fog", color: ["#16222a", "#3a6073"] },
-  Fog: { icon: "weather-fog", color: ["#8e9eab", "#eef2f3"] },
-  Sand: { icon: "weather-fog", color: ["#4da0b0", "#d39d38"] },
-  Dust: { icon: "weather-fog", color: ["#4da0b0", "#d39d38"] },
-  Ash: { icon: "weather-fog", color: ["#304352", "#d7d2cc"] },
-  Squall: { icon: "weather-windy", color: ["#16222a", "#3a6073"] },
-  Tornado: { icon: "weather-tornado", color: ["#16222a", "#3a6073"] },
-  Clear: { icon: "weather-sunny", color: ["#89F7FE", "#66A6FF"] },
-  Clouds: { icon: "weather-cloudy", color: ["#8e9eab", "#eef2f3"] },
+  Drizzle: {icon: "weather-rainy"},
+  Rain: {icon: "weather-pouring"},
+  Snow: {icon: "weather-snowy-heavy"},
+  Mist: {icon: "weather-hail"},
+  Smoke: {icon: "weather-fog"},
+  Haze: {icon: "weather-hazy"},
+  Dust: {icon: "weather-fog"},
+  Fog: {icon: "weather-fog"},
+  Sand: {icon: "weather-fog"},
+  Dust: {icon: "weather-fog"},
+  Ash: {icon: "weather-fog"},
+  Squall: {icon: "weather-windy"},
+  Tornado: {icon: "weather-tornado"},
+  Clear: {icon: "weather-sunny"},
+  Clouds: {icon: "weather-cloudy"},
 };
 
 // Thunderstorm : {icon : "weather-lightning-rainy",color:['#141517','#fffc00'] },
@@ -41,6 +40,22 @@ const weatherOption = {
 // Tornado : {icon :"weather-tornado",color:['#16222a','#3a6073'] },
 // Clear: { icon: "weather-sunny", color: ['#ee9ca7', '#ffdde1'] },
 // Clouds: { icon: "weather-cloudy", color: ['#8e9eab', '#eef2f3'] }
+// color: ["#141517", "#fffc00"]
+// color: ["#3a7bd5", "#00d2ff"]
+// color: ["#000046", "#1cb5e0"]
+// color: ["#00416a", "#e4e5e6"]
+// color: ["#8e9eab", "#eef2f3"]
+// color: ["#304352", "#d7d2cc"]
+// color: ["#8e9eab", "#eef2f3"]
+// color: ["#16222a", "#3a6073"]
+// color: ["#8e9eab", "#eef2f3"]
+// color: ["#4da0b0", "#d39d38"]
+// color: ["#4da0b0", "#d39d38"]
+// color: ["#304352", "#d7d2cc"]
+// color: ["#16222a", "#3a6073"]
+// color: ["#16222a", "#3a6073"]
+// color: ["#89F7FE", "#66A6FF"]
+// color: ["#8e9eab", "#eef2f3"]
 
 // Thunderstorm : 천둥번개폭풍 ok
 // Drizzle : 이슬비 ok
@@ -59,11 +74,15 @@ const weatherOption = {
 // Clear : 맑음 ok
 // Clouds : 흐림 ok
 
+// 나눠야 할 백그라운드
+// 낮 : 맑음, 흐림 , 비, 눈
+// 밤 : 맑음, 흐림, 비, 눈
+
 const image = {
-  uri: "https://cdn.pixabay.com/photo/2014/12/15/17/16/night-sky-569319_960_720.jpg",
+  uri: "https://cdn.pixabay.com/photo/2017/03/24/17/10/maldives-2171627_960_720.jpg",
 };
 
-export default function Weather({ today, yesterday }) {
+export default function Weather({today, yesterday}) {
   // console.log(today)
   // console.log(yesterday)
 
