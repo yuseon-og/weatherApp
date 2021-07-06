@@ -22,23 +22,23 @@ const weatherOption = {
   Clouds: { icon: "weather-cloudy", image: "cloud" },
 };
 
-function findNow(today) {
-  let result;
-  if (today.dt >= today.sys.sunrise && today.dt <= today.sys.sunset) {
-    result = require(`../assets/${1}_${
-      weatherOption[today.weather[0].main].image
-    }.jpg`);
-  } else {
-    result = require(`../assets/${2}_${
-      weatherOption[today.weather[0].main].image
-    }.jpg`);
-  }
-  return result;
-}
+// function findNow(today) {
+//   let result;
+//   if (today.dt >= today.sys.sunrise && today.dt <= today.sys.sunset) {
+//     result = require(`../assets/${1}_${
+//       weatherOption[today.weather[0].main].image
+//     }.jpg`);
+//   } else {
+//     result = require(`../assets/${2}_${
+//       weatherOption[today.weather[0].main].image
+//     }.jpg`);
+//   }
+//   return result;
+// }
 
 function findImage(today) {
   let result = {};
-  if (today.dt >= today.sys.sunrise && today.dt <= today.sys.sunset) {
+  if (today.dt >= today.sunrise && today.dt <= today.sunset) {
     result = { a: "1", b: weatherOption[today.weather[0].main].image };
   } else {
     result = { a: "2", b: weatherOption[today.weather[0].main].image };
@@ -47,21 +47,22 @@ function findImage(today) {
   return result;
 }
 
-function findHour(today) {
-  let result;
-  if (today.dt >= today.sunrise && today.dt <= today.sunset) {
-    result = require(`./../assets/${1}_${
-      weatherOption[today.weather[0].main].image
-    }.jpg`);
-  } else {
-    result = require(`./../assets/${2}_${
-      weatherOption[today.weather[0].main].image
-    }.jpg`);
-  }
-  return result;
-}
+// function findHour(today) {
+//   let result;
+//   if (today.dt >= today.sunrise && today.dt <= today.sunset) {
+//     result = require(`./../assets/${1}_${
+//       weatherOption[today.weather[0].main].image
+//     }.jpg`);
+//   } else {
+//     result = require(`./../assets/${2}_${
+//       weatherOption[today.weather[0].main].image
+//     }.jpg`);
+//   }
+//   return result;
+// }
 
-export { findNow, findHour, findImage };
+// export { findHour, findImage };
+export { findImage };
 
 export default weatherOption;
 

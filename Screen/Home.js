@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
-import { Ionicons, MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
-import weatherOption, { findImage } from "../Controller/WeatherDesign";
+import { View, Text, StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { UserContext } from "../context";
-let image2 = {};
 
 export default function Weather({ today, yesterday }) {
   const context = useContext(UserContext);
@@ -15,14 +14,15 @@ export default function Weather({ today, yesterday }) {
   // console.log(today.sys);
   // console.log(today);
   // console.log(yesterday)
-
-  const tempGap = Math.round(today.main.temp - yesterday.temp);
-  const humidGap = Math.round(today.main.humidity - yesterday.humidity);
+  console.log(context.weatherD);
+  // const tempGap = Math.round(today.main.temp - yesterday.temp);
+  // const humidGap = Math.round(today.main.humidity - yesterday.humidity);
 
   return (
     <View style={styles.container}>
       <View style={styles.halfContainer1}>
-        <MaterialCommunityIcons
+        <Text>asdf</Text>
+        {/* <MaterialCommunityIcons
           name={weatherOption[today.weather[0].main].icon}
           size={96}
           color="white"
@@ -58,17 +58,15 @@ export default function Weather({ today, yesterday }) {
               ? `어제보다 ${humidGap}% 높아요`
               : `어제보다 ${-humidGap}% 낮아요`}
           </Text>
-        </View>
+        </View> */}
       </View>
     </View>
   );
 }
 
-export { image2 };
-
 Weather.propTypes = {
-  today: PropTypes.object.isRequired,
-  yesterday: PropTypes.object.isRequired,
+  // today: PropTypes.object.isRequired,
+  // yesterday: PropTypes.object.isRequired,
   // condition : PropTypes.oneOf(["Thunderstorm","Drizzle","Rain","Snow","Mist","Smoke","Haze","Dust","Fog","Sand","Dust","Ash","Squall","Tornado","Clear","Clouds"]).isRequired
 };
 

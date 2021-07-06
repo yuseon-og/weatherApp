@@ -15,10 +15,9 @@ import LoadingBetween from "../Screen/LoadingBetween";
 import ForecastHour from "../Screen/ForecastHour";
 
 const ADDRESS = "https://api.openweathermap.org/data/2.5/";
-const HISTORY = "https://history.openweathermap.org/data/2.5/history/city?";
+
 const API_KEY = "1eaa85bc3b419d87b8faa16def8c886e";
 const API = "onecall";
-const EXCLUDE = "daily";
 
 // refreshControll 위한 함수
 const wait = (timeout) => {

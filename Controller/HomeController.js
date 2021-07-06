@@ -98,18 +98,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export { a, b };
-// return yesterdayData === null ? (
-//   <Loading />
-// ) : (
-//   <ScrollView
-//     contentContainerStyle={styles.scrollView}
-//     refreshControl={
-//       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-//     }
-//   >
-//     <Home today={weatherData} yesterday={yesterdayData} />
-//     {/* <ForecastHourController /> */}
-//   </ScrollView>
-// );
