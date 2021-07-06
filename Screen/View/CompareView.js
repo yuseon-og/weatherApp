@@ -1,32 +1,10 @@
 import React from "react";
-import {StyleSheet, Text, View, ScrollView} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
-import {MaterialCommunityIcons, FontAwesome5} from "@expo/vector-icons";
-import {unmountComponentAtNode} from "react-dom";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
+import weatherOption from "../../Controller/WeatherDesign";
 
-const weatherOption = {
-  Thunderstorm: {
-    icon: "weather-lightning-rainy",
-    color: ["#141517", "#fffc00"],
-  },
-  Drizzle: {icon: "weather-rainy", color: ["#3a7bd5", "#00d2ff"]},
-  Rain: {icon: "weather-pouring", color: ["#000046", "#1cb5e0"]},
-  Snow: {icon: "weather-snowy-heavy", color: ["#00416a", "#e4e5e6"]},
-  Mist: {icon: "weather-hail", color: ["#8e9eab", "#eef2f3"]},
-  Smoke: {icon: "weather-fog", color: ["#304352", "#d7d2cc"]},
-  Haze: {icon: "weather-hazy", color: ["#8e9eab", "#eef2f3"]},
-  Dust: {icon: "weather-fog", color: ["#16222a", "#3a6073"]},
-  Fog: {icon: "weather-fog", color: ["#8e9eab", "#eef2f3"]},
-  Sand: {icon: "weather-fog", color: ["#4da0b0", "#d39d38"]},
-  Dust: {icon: "weather-fog", color: ["#4da0b0", "#d39d38"]},
-  Ash: {icon: "weather-fog", color: ["#304352", "#d7d2cc"]},
-  Squall: {icon: "weather-windy", color: ["#16222a", "#3a6073"]},
-  Tornado: {icon: "weather-tornado", color: ["#16222a", "#3a6073"]},
-  Clear: {icon: "weather-sunny", color: ["#89F7FE", "#66A6FF"]},
-  Clouds: {icon: "weather-cloudy", color: ["#8e9eab", "#eef2f3"]},
-};
-
-export default function Forecast({time, weather, todayTemp, yesterDayTemp}) {
+export default function Forecast({ time, weather, todayTemp, yesterDayTemp }) {
   //   console.log(time);
   //   console.log(weather);
   //   console.log(todayTemp);
@@ -137,7 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#6bbaeb",
     shadowColor: "#d2ffff",
-    shadowOffset: {width: 1, height: 2},
+    shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.7,
     shadowRadius: 2,
     elevation: 5,
@@ -151,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#e9a5b6",
     shadowColor: "#d2ffff",
-    shadowOffset: {width: 1, height: 2},
+    shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.7,
     shadowRadius: 2,
     elevation: 5,
@@ -165,7 +143,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#ebba66",
     shadowColor: "#d2ffff",
-    shadowOffset: {width: 1, height: 2},
+    shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.7,
     shadowRadius: 2,
     elevation: 5,

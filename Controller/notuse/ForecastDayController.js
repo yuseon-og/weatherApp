@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import * as Location from "expo-location";
 import axios from "axios";
-import LoadingBetween from "../Screen/LoadingBetween";
-import ForecastDay from "../Screen/ForecastDay";
+import LoadingBetween from "../../Screen/LoadingBetween";
+import ForecastDay from "../../Screen/ForecastDay";
 
 const API_KEY = "1eaa85bc3b419d87b8faa16def8c886e";
 

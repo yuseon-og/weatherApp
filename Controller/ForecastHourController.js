@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -44,7 +44,7 @@ export default function HourlyCompare() {
   const [hourArray, setHourArray] = useState(null);
 
   const getWeather = async (latitude, longitude) => {
-    const {data} = await axios.get(
+    const { data } = await axios.get(
       `${ADDRESS}${API}?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
     sethourForecast(data);
@@ -103,10 +103,13 @@ export default function HourlyCompare() {
     getLocation();
   }, []);
 
+  // console.log(hourForecast);
+
   return hourHistorical === null ? (
     <LoadingBetween />
   ) : (
     <ScrollView
+      contentContainerStyle={styles.scrollView}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
@@ -119,3 +122,8 @@ export default function HourlyCompare() {
     </ScrollView>
   );
 }
+const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+});

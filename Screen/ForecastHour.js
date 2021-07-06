@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  RefreshControl,
-} from "react-native";
-import {LinearGradient} from "expo-linear-gradient";
+import { StyleSheet, ScrollView } from "react-native";
 import CompareView from "./View/CompareView";
 
-export default function Forecast({today, yesterday, yesterday2}) {
+export default function Forecast({ today, yesterday, yesterday2 }) {
   //여기서 부터  어제와 오늘 비교하는 내용
-  // console.log(today);
+  // console.log(today.current);
   // console.log(yesterday.hourly);
   // console.log(yesterday2);
 
@@ -22,7 +14,7 @@ export default function Forecast({today, yesterday, yesterday2}) {
 
   const yesterdayArray = [...(yesterday.hourly || []), ...(yesterday2 || [])];
 
-  console.log(yesterdayArray);
+  // console.log(yesterdayArray);
   const todayHourly = today.hourly;
 
   //1일전 데이터에서 현재시간기준으로 해야하니까
@@ -74,13 +66,14 @@ export default function Forecast({today, yesterday, yesterday2}) {
         weather={element.weather}
         todayTemp={element.todayTemp}
         yesterDayTemp={element.yesterdayTemp}
+        style={styles.container}
       />
     );
   });
 
   return (
     <>
-      <LinearGradient colors={["#0083b0", "#00b4db"]} style={styles.container}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
         <CompareView
           time={today.current.dt}
           weather={today.current.weather[0].main}
@@ -89,13 +82,21 @@ export default function Forecast({today, yesterday, yesterday2}) {
         />
 
         {compareData}
-      </LinearGradient>
+      </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
+  },
+  scrollView: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
 });

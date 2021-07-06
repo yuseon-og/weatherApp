@@ -15,6 +15,9 @@ const wait = (timeout) => {
   });
 };
 
+let a = {};
+let b = {};
+
 export default function Data() {
   // refreshControll 위한 state
   const [refreshing, setRefreshing] = React.useState(false);
@@ -67,6 +70,11 @@ export default function Data() {
     getLocation();
   }, []);
 
+  // console.log(weatherData);
+
+  a = weatherData;
+  b = yesterdayData;
+
   return yesterdayData === null ? (
     <Loading />
   ) : (
@@ -90,3 +98,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export { a, b };
+// return yesterdayData === null ? (
+//   <Loading />
+// ) : (
+//   <ScrollView
+//     contentContainerStyle={styles.scrollView}
+//     refreshControl={
+//       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+//     }
+//   >
+//     <Home today={weatherData} yesterday={yesterdayData} />
+//     {/* <ForecastHourController /> */}
+//   </ScrollView>
+// );
