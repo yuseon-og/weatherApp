@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import {NavigationContainer} from "@react-navigation/native";
-import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import React, {useState, useEffect} from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -14,7 +14,7 @@ import ForecastHourController from "./Controller/ForecastHourController";
 import * as Location from "expo-location";
 import axios from "axios";
 import UserContextProvider from "./context";
-import {findImage} from "./Controller/WeatherDesign";
+import { findImage } from "./Controller/WeatherDesign";
 
 import HomeController1 from "./Screen/Home";
 import ForecastHourController1 from "./Screen/View/WeatherView";
@@ -58,7 +58,7 @@ export default function App() {
   const [longitude, setLongitude] = useState(null);
 
   const getWeather = async (lat, long) => {
-    const {data} = await axios.get(
+    const { data } = await axios.get(
       `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric&lang=kr`
     );
 
@@ -172,9 +172,9 @@ export default function App() {
         <NavigationContainer>
           <ImageBackground source={image} style={styles.image}>
             <Tab.Navigator
-              sceneContainerStyle={{backgroundColor: "transparent"}}
+              sceneContainerStyle={{ backgroundColor: "transparent" }}
               tabBarOptions={{
-                activeTintColor: "tomato",
+                activeTintColor: "rgba(235, 77, 75,1.0)",
                 inactiveTintColor: "gray",
                 showLabel: true,
                 showIcon: true,
@@ -184,12 +184,12 @@ export default function App() {
               <Tab.Screen
                 name="Home"
                 component={HomeController1}
-                options={{tabBarLabel: "지금날씨"}}
+                options={{ tabBarLabel: "오늘의 날씨" }}
               />
               <Tab.Screen
                 name="ForecastHour"
                 component={ForecastHourController1}
-                options={{tabBarLabel: "시간대별 날씨"}}
+                options={{ tabBarLabel: "이번주 날씨" }}
               />
             </Tab.Navigator>
           </ImageBackground>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export {weatherD, yesterdayD, dayBeforeD};
+export { weatherD, yesterdayD, dayBeforeD };
 {
   /* <NavigationContainer>
   <ImageBackground source={image} style={styles.image}>
