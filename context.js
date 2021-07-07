@@ -1,9 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import * as Location from "expo-location";
 import axios from "axios";
 
-import { weatherD, yesterdayD, dayBeforeD } from "./App";
+import {weatherD, yesterdayD, dayBeforeD} from "./App";
 
+const UserContext = React.createContext();
+
+const UserContextProvider = ({children}) => (
+  <UserContext.Provider value={{weatherD, yesterdayD, dayBeforeD}}>
+    {children}
+  </UserContext.Provider>
+);
+
+export default UserContextProvider;
+
+export {UserContext};
+
+// API 받아오는 로직
 // const ADDRESS = "https://api.openweathermap.org/data/2.5/";
 // const API_KEY = "1eaa85bc3b419d87b8faa16def8c886e";
 // const API = "onecall";
@@ -76,15 +89,3 @@ import { weatherD, yesterdayD, dayBeforeD } from "./App";
 //     dayBeforeD = dayBeforeData;
 //   }, []);
 // }
-
-const UserContext = React.createContext();
-
-const UserContextProvider = ({ children }) => (
-  <UserContext.Provider value={{ weatherD, yesterdayD, dayBeforeD }}>
-    {children}
-  </UserContext.Provider>
-);
-
-export default UserContextProvider;
-
-export { UserContext };

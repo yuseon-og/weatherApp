@@ -5,22 +5,44 @@ const weatherOption = {
     icon: "weather-lightning-rainy",
     image: "rain",
   },
-  Drizzle: { icon: "weather-rainy", image: "rain" },
-  Rain: { icon: "weather-pouring", image: "rain" },
-  Snow: { icon: "weather-snowy-heavy", image: "show" },
-  Mist: { icon: "weather-hail", image: "rain" },
-  Smoke: { icon: "weather-fog", image: "cloud" },
-  Haze: { icon: "weather-hazy", image: "cloud" },
-  Dust: { icon: "weather-fog", image: "cloud" },
-  Fog: { icon: "weather-fog", image: "cloud" },
-  Sand: { icon: "weather-fog", image: "cloud" },
-  Dust: { icon: "weather-fog", image: "cloud" },
-  Ash: { icon: "weather-fog", image: "cloud" },
-  Squall: { icon: "weather-windy", image: "cloud" },
-  Tornado: { icon: "weather-tornado", image: "cloud" },
-  Clear: { icon: "weather-sunny", image: "sun" },
-  Clouds: { icon: "weather-cloudy", image: "cloud" },
+  Drizzle: {icon: "weather-rainy", image: "rain"},
+  Rain: {icon: "weather-pouring", image: "rain"},
+  Snow: {icon: "weather-snowy-heavy", image: "show"},
+  Mist: {icon: "weather-hail", image: "rain"},
+  Smoke: {icon: "weather-fog", image: "cloud"},
+  Haze: {icon: "weather-hazy", image: "cloud"},
+  Dust: {icon: "weather-fog", image: "cloud"},
+  Fog: {icon: "weather-fog", image: "cloud"},
+  Sand: {icon: "weather-fog", image: "cloud"},
+  Dust: {icon: "weather-fog", image: "cloud"},
+  Ash: {icon: "weather-fog", image: "cloud"},
+  Squall: {icon: "weather-windy", image: "cloud"},
+  Tornado: {icon: "weather-tornado", image: "cloud"},
+  Clear: {icon: "weather-sunny", image: "sun"},
+  Clouds: {icon: "weather-cloudy", image: "cloud"},
 };
+
+// const weatherOption = {
+//   Thunderstorm: {
+//     icon: "weather-lightning-rainy",
+//     image: "rain",
+//   },
+//   Drizzle: {icon: "weather-rainy", image: "rain"},
+//   Rain: {icon: "weather-pouring", image: "rain"},
+//   Snow: {icon: "weather-snowy-heavy", image: "show"},
+//   Mist: {icon: "weather-hail", image: "rain"},
+//   Smoke: {icon: "weather-fog", image: "cloud"},
+//   Haze: {icon: "weather-hazy", image: "cloud"},
+//   Dust: {icon: "weather-fog", image: "cloud"},
+//   Fog: {icon: "weather-fog", image: "cloud"},
+//   Sand: {icon: "weather-fog", image: "cloud"},
+//   Dust: {icon: "weather-fog", image: "cloud"},
+//   Ash: {icon: "weather-fog", image: "cloud"},
+//   Squall: {icon: "weather-windy", image: "cloud"},
+//   Tornado: {icon: "weather-tornado", image: "cloud"},
+//   Clear: {icon: "weather-sunny", image: "sun"},
+//   Clouds: {icon: "weather-cloudy", image: "cloud"},
+// };
 
 // function findNow(today) {
 //   let result;
@@ -36,12 +58,14 @@ const weatherOption = {
 //   return result;
 // }
 
+function matchImage(result) {}
+
 function findImage(today) {
-  let result = {};
+  let result = "";
   if (today.dt >= today.sunrise && today.dt <= today.sunset) {
-    result = { a: "1", b: weatherOption[today.weather[0].main].image };
+    result = {a: "1", b: weatherOption[today.weather[0].main].image};
   } else {
-    result = { a: "2", b: weatherOption[today.weather[0].main].image };
+    result = {a: "2", b: weatherOption[today.weather[0].main].image};
   }
 
   return result;
@@ -62,7 +86,7 @@ function findImage(today) {
 // }
 
 // export { findHour, findImage };
-export { findImage };
+export {findImage};
 
 export default weatherOption;
 

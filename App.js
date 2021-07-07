@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import React, { useState, useEffect, useContext } from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import React, {useState, useEffect} from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -14,11 +14,12 @@ import ForecastHourController from "./Controller/ForecastHourController";
 import * as Location from "expo-location";
 import axios from "axios";
 import UserContextProvider from "./context";
-import weatherOption, { findImage } from "./Controller/WeatherDesign";
+import {findImage} from "./Controller/WeatherDesign";
 
 import HomeController1 from "./Screen/Home";
 import ForecastHourController1 from "./Screen/View/WeatherView";
 import Loading from "./Screen/Loading";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -57,8 +58,8 @@ export default function App() {
   const [longitude, setLongitude] = useState(null);
 
   const getWeather = async (lat, long) => {
-    const { data } = await axios.get(
-      `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
+    const {data} = await axios.get(
+      `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric&lang=kr`
     );
 
     // console.log("여기?");
@@ -72,10 +73,10 @@ export default function App() {
       const yesterday1 = data.current.dt - 86400;
       const yesterday2 = data.current.dt;
       const yesterdayData1 = await axios.get(
-        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric`
+        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric&lang=kr`
       );
       const yesterdayData2 = await axios.get(
-        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday2}&appid=${API_KEY}&units=metric`
+        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday2}&appid=${API_KEY}&units=metric&lang=kr`
       );
 
       setYesterday(yesterdayData1.data);
@@ -83,7 +84,7 @@ export default function App() {
     } else {
       const yesterday1 = data.current.dt - 86400;
       const yesterdayData1 = await axios.get(
-        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric`
+        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric&lang=kr`
       );
       // console.log(yesterdayData1);
 
@@ -121,10 +122,44 @@ export default function App() {
     image = require("./assets/1_sun.jpg");
   } else {
     const imageSet = findImage(weatherD.current);
-    image = require(`./assets/${imageSet.a}_${imageSet.b}.jpg`);
+    if (imageSet.a === "1") {
+      switch (imageSet.b) {
+        case "sun":
+          image = require("./assets/1_sun.jpg");
+          break;
+        case "cloud":
+          image = require("./assets/1_cloud.jpg");
+          break;
+        case "rain":
+          image = require("./assets/1_rain.jpg");
+          break;
+        case "snow":
+          image = require("./assets/1_snow.jpg");
+          break;
+        default:
+          image = require("./assets/1_sun.jpg");
+      }
+    } else {
+      switch (imageSet.b) {
+        case "sun":
+          image = require("./assets/2_sun.jpg");
+          break;
+        case "cloud":
+          image = require("./assets/2_cloud.jpg");
+          break;
+        case "rain":
+          image = require("./assets/2_rain.jpg");
+          break;
+        case "snow":
+          image = require("./assets/2_snow.jpg");
+          break;
+        default:
+          image = require("./assets/2_sun.jpg");
+      }
+    }
   }
 
-  return weatherD === null ? (
+  return dayBeforeD === null ? (
     <Loading />
   ) : (
     <UserContextProvider>
@@ -137,16 +172,24 @@ export default function App() {
         <NavigationContainer>
           <ImageBackground source={image} style={styles.image}>
             <Tab.Navigator
-              sceneContainerStyle={{ backgroundColor: "transparent" }}
-              // tabBarOptions={{
-              //   showLabel: "false",
-              // }}
+              sceneContainerStyle={{backgroundColor: "transparent"}}
+              tabBarOptions={{
+                activeTintColor: "tomato",
+                inactiveTintColor: "gray",
+                showLabel: true,
+                showIcon: true,
+              }}
               // tabBarPosition="bottom"
             >
-              <Tab.Screen name="Home" component={HomeController1} />
+              <Tab.Screen
+                name="Home"
+                component={HomeController1}
+                options={{tabBarLabel: "지금날씨"}}
+              />
               <Tab.Screen
                 name="ForecastHour"
                 component={ForecastHourController1}
+                options={{tabBarLabel: "시간대별 날씨"}}
               />
             </Tab.Navigator>
           </ImageBackground>
@@ -166,7 +209,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export { weatherD, yesterdayD, dayBeforeD };
+export {weatherD, yesterdayD, dayBeforeD};
 {
   /* <NavigationContainer>
   <ImageBackground source={image} style={styles.image}>
