@@ -1,32 +1,47 @@
-import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import React, {useContext} from "react";
+import {StyleSheet, ScrollView} from "react-native";
 import CompareView from "./View/CompareView";
+import ContentView from "./View/ContentView";
+import {UserContext} from "../context";
 
-export default function Forecast({ today, yesterday, yesterday2 }) {
+export default function Forecast() {
+  const context = useContext(UserContext);
+  // console.log("이건 컨텍스트");
+  // console.log(context);
+
+  const weatherD = context.weatherD;
+  const yesterdayD = context.yesterdayD;
+  const dayBeforeD = context.dayBeforeD;
+
+  // 오늘 시간데이터와 새로 만들어진 과거 데이터와 비교
+  // 과거 시간데이터 + 86400 == 오늘시간데이터 일치하면
+  // 아래의 새 배열에 push로 데이터 넣기
+  let newObject = [];
+
+  // weatherD = today
+  // yesterdayD = yesterday
+  // dayBeforeD = yesterday2
+
   //여기서 부터  어제와 오늘 비교하는 내용
   // console.log(today.current);
   // console.log(yesterday.hourly);
   // console.log(yesterday2);
 
-  // 09시 이전이라면 yesterday2데이터가 있고 이후라면 빈배열
+  // 09시 이전이라면 yesterday2(dayBeforeD)데이터가 있고 이후라면 빈배열
   // 이 둘을 합쳐서 09시 이전이라면 전전날09시~전날08시 + 전날 09시~당일 08시까지 배열만듦
   // 09시 이후라면 전날 09시~당일 08시까지배열만 반환
 
-  const yesterdayArray = [...(yesterday.hourly || []), ...(yesterday2 || [])];
-
+  const yesterdayArray = [...(yesterdayD.hourly || []), ...(dayBeforeD || [])];
+  const todayHourly = weatherD.hourly;
   // console.log(yesterdayArray);
-  const todayHourly = today.hourly;
 
   //1일전 데이터에서 현재시간기준으로 해야하니까
   // 현재시간기준 1일전보다 큰것만 반환하는 새로운 배열 만들기
 
   const yesterdayHourly = yesterdayArray.filter(function (element) {
-    return element.dt >= yesterday.current.dt;
+    return element.dt >= yesterdayD.current.dt;
   });
   // console.log(yesterdayHourly);
-
-  // 새로 배열을 만들어
-  const newObject = [];
 
   // 좀따 삭제
   // todayHourly.map((element) => {
@@ -42,45 +57,110 @@ export default function Forecast({ today, yesterday, yesterday2 }) {
   // 오늘 시간데이터 하나하나와 비교하는데 어제 시간데이터 + 86400 === 오늘 시간데이터와 같은거면
   // 새로 배열 만든거에 push로 데이터를 넣어라
 
-  todayHourly.map((element) => {
-    yesterdayHourly.map((number) => {
-      number.dt + 86400 === element.dt
+  todayHourly.map((eleToday) => {
+    yesterdayHourly.map((eleYester) => {
+      eleYester.dt + 86400 === eleToday.dt
         ? newObject.push({
-            dt: element.dt,
-            weather: element.weather[0].main,
-            todayTemp: element.feels_like,
-            yesterdayTemp: number.feels_like,
+            dt: eleToday.dt,
+            weather: eleToday.weather[0].main,
+            icon: eleToday.weather[0].icon,
+            todayTemp: eleToday.feels_like,
+            yesterdayTemp: eleYester.feels_like,
+            pop: eleToday.pop,
           })
         : null;
     });
   });
 
+  // 12개 까지만 넣기 위해서....
+  let finalArray = [];
+
+  for (let i = 0; i < 12; i++) {
+    finalArray.push(newObject[i]);
+  }
+
+  // const finalArray = newObject.filter((n) => {
+  //   return n < 13;
+  // });
+
   // console.log(`새로운 오브젝트 ${newObject}`);
   // console.log(newObject);
+  // console.log(finalArray);
 
-  const compareData = newObject.map((element) => {
+  const compareData = finalArray.map((element) => {
     return (
       <CompareView
         key={element.dt}
         time={element.dt}
         weather={element.weather}
+        icon={element.icon}
         todayTemp={element.todayTemp}
         yesterDayTemp={element.yesterdayTemp}
+        pop={element.pop}
         style={styles.container}
       />
     );
   });
 
+  // const compareData = newObject.map((element) => {
+  //   return (
+  //     <CompareView
+  //       key={element.dt}
+  //       time={element.dt}
+  //       weather={element.weather}
+  //       icon={element.icon}
+  //       todayTemp={element.todayTemp}
+  //       yesterDayTemp={element.yesterdayTemp}
+  //       pop={element.pop}
+  //       style={styles.container}
+  //     />
+  //   );
+  // });
+
+  // const compareData = newObject.forEach(function (element) {
+  //   if (element < 13) {
+  //     return (
+  //       <CompareView
+  //         key={element.dt}
+  //         time={element.dt}
+  //         weather={element.weather}
+  //         icon={element.icon}
+  //         todayTemp={element.todayTemp}
+  //         yesterDayTemp={element.yesterdayTemp}
+  //         pop={element.pop}
+  //         style={styles.container}
+  //       />
+  //     );
+  //   }
+  // });
+
+  // const compareData = () => {
+  //   for (let i = 0; i < 13; i++) {
+  //     return (
+  //       <CompareView
+  //         key={newObject[i].dt}
+  //         time={newObject[i].dt}
+  //         weather={newObject[i].weather}
+  //         icon={newObject[i].icon}
+  //         todayTemp={newObject[i].todayTemp}
+  //         yesterDayTemp={newObject[i].yesterdayTemp}
+  //         pop={newObject[i].pop}
+  //         style={styles.container}
+  //       />
+  //     );
+  //   }
+  // };
+
   return (
     <>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
-        <CompareView
+        {/* <CompareView
           time={today.current.dt}
           weather={today.current.weather[0].main}
           todayTemp={today.current.feels_like}
           yesterDayTemp={yesterday.current.feels_like}
-        />
-
+        /> */}
+        <ContentView />
         {compareData}
       </ScrollView>
     </>

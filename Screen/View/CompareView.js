@@ -1,15 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {StyleSheet, Text, View, ScrollView, Image} from "react-native";
 
-import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import weatherOption from "../../Controller/WeatherDesign";
-
-export default function Forecast({ time, weather, todayTemp, yesterDayTemp }) {
+export default function Forecast({
+  time,
+  weather,
+  todayTemp,
+  yesterDayTemp,
+  icon,
+  pop,
+}) {
   //   console.log(time);
   //   console.log(weather);
   //   console.log(todayTemp);
   //   console.log(yesterDayTemp);
-
+  // console.log(time);
   let date = new Date(time * 1000);
   let month = date.getMonth() + 1;
   let day = date.getDate();
@@ -36,6 +40,57 @@ export default function Forecast({ time, weather, todayTemp, yesterDayTemp }) {
         }
       >
         <View style={styles.weatherBox}>
+          <View style={styles.weatherBoxDT}>
+            <Text style={styles.textDT}>
+              {month}월 {day}일
+            </Text>
+          </View>
+          <View style={styles.weatherBoxDT}>
+            <Text style={styles.textDT}>
+              {hours >= 12 ? `오후 ${hours - 12}시` : `오전 ${hours}시`}
+            </Text>
+          </View>
+          <View style={styles.weatherBoxNow}>
+            <View style={styles.iconBox}>
+              <Image
+                source={{
+                  uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+                }}
+                style={{width: 70, height: 70}}
+              />
+            </View>
+            <View style={styles.innerBox}>
+              <Text style={styles.textDT}>{weather}</Text>
+            </View>
+          </View>
+          <View style={styles.weatherBoxNow}>
+            <View style={styles.iconBox}>
+              <Text style={styles.textTemp}>{todayTemp} º</Text>
+            </View>
+            <View style={styles.innerBox}>
+              {compareTemp === 0 ? (
+                <View style={styles.innerBox}>
+                  <Text style={styles.textSmall}>어제와</Text>
+                  <Text style={styles.textCompare}>같아요</Text>
+                </View>
+              ) : compareTemp > 0 ? (
+                <View style={styles.innerBox}>
+                  <Text style={styles.textSmall}>어제보다</Text>
+                  <Text style={styles.textCompare}>{compareTemp} º 높아요</Text>
+                </View>
+              ) : (
+                <View style={styles.innerBox}>
+                  <Text style={styles.textSmall}>어제보다</Text>
+                  <Text style={styles.textCompare}>{compareTemp} º 낮아요</Text>
+                </View>
+              )}
+            </View>
+          </View>
+          <View style={styles.weatherBoxPop}>
+            <Text style={styles.textDT}>{pop} %</Text>
+          </View>
+        </View>
+        {/* <View style={styles.weatherBox}>
           <View style={styles.weatherBoxInner}>
             <View style={styles.textBox}>
               <Text style={styles.textMain}>
@@ -55,8 +110,6 @@ export default function Forecast({ time, weather, todayTemp, yesterDayTemp }) {
               size={55}
               color="white"
             />
-
-            {/* <Text style={styles.textMain}>{`  ${weather}`}</Text> */}
           </View>
         </View>
 
@@ -72,7 +125,7 @@ export default function Forecast({ time, weather, todayTemp, yesterDayTemp }) {
             </Text>
           </View>
 
-          {/* 비교온도가 높냐 낮냐 보여주는 박스 */}
+          비교온도가 높냐 낮냐 보여주는 박스
           <View style={styles.weatherBoxInner3}>
             {compareTemp === 0 ? (
               <FontAwesome5
@@ -97,115 +150,120 @@ export default function Forecast({ time, weather, todayTemp, yesterDayTemp }) {
               />
             )}
           </View>
-        </View>
+        </View> */}
       </View>
     </>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
   box_container_cold: {
-    marginTop: 15,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    borderRadius: 15,
-    backgroundColor: "#6bbaeb",
-    shadowColor: "#d2ffff",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.7,
-    shadowRadius: 2,
-    elevation: 5,
-    color: "white",
+    width: "8%",
+    backgroundColor: "rgba(5, 30, 80,0.5)",
   },
   box_container_warm: {
-    marginTop: 15,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    borderRadius: 15,
-    backgroundColor: "#e9a5b6",
-    shadowColor: "#d2ffff",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.7,
-    shadowRadius: 2,
-    elevation: 5,
-    color: "white",
+    width: "8%",
+    backgroundColor: "rgba(80, 40, 50,0.5)",
   },
   box_container_same: {
-    marginTop: 15,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    borderRadius: 15,
-    backgroundColor: "#ebba66",
-    shadowColor: "#d2ffff",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.7,
-    shadowRadius: 2,
-    elevation: 5,
-    color: "white",
+    width: "8%",
+    backgroundColor: "rgba(50, 80, 80,0.5)",
   },
   weatherBox: {
     flex: 3,
 
-    flexDirection: "row",
     // borderWidth: 1,
     // borderColor: "black",
   },
-  weatherBoxInner: {
-    flex: 1,
+  weatherBoxDT: {
+    flex: 0.5,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 5,
-    paddingRight: 5,
-    borderRadius: 15,
 
-    borderWidth: 1,
-    borderColor: "yellow",
-  },
-  weatherBoxInner2: {
-    flex: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 5,
-    paddingRight: 5,
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
+    // 각 상자마다 아래 테두리만 넣은것
+    borderBottomWidth: 0.8,
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderColor: "rgba(127, 143, 166,0.5)",
+
+    // paddingTop: 10,
+    // paddingBottom: 10,
+    // paddingLeft: 5,
+    // paddingRight: 5,
     // borderWidth: 1,
     // borderColor: "yellow",
   },
-  weatherBoxInner3: {
+
+  weatherBoxNow: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+
+    justifyContent: "center",
+    alignItems: "center",
+
+    borderBottomWidth: 0.8,
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderColor: "rgba(127, 143, 166,0.5)",
+    // borderWidth: 1,
+    // borderColor: "blue",
+  },
+  iconBox: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+
+    // borderWidth: 1,
+    // borderColor: "green",
+  },
+  innerBox: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
+    // borderWidth: 1,
+    // borderColor: "grey",
+  },
+
+  weatherBoxPop: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 5,
     paddingRight: 5,
-    borderRadius: 15,
-    justifyContent: "center",
 
     // borderWidth: 1,
     // borderColor: "yellow",
   },
+
   textBox: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
-  textMain: {
+  textDT: {
+    fontSize: 15,
+    color: "white",
+    fontWeight: "300",
+  },
+  textTemp: {
+    fontSize: 17,
+    color: "white",
+    fontWeight: "300",
+  },
+  textSmall: {fontSize: 10, color: "white", fontWeight: "400"},
+  textCompare: {fontSize: 15, color: "white", fontWeight: "400"},
+  textPo: {
     fontSize: 20,
     color: "white",
-    fontWeight: "500",
+    fontWeight: "300",
   },
 
   icon: {
