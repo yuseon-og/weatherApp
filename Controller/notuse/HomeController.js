@@ -1,10 +1,10 @@
 import "react-native-gesture-handler";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Alert, ScrollView, RefreshControl } from "react-native";
+import React, {useState, useEffect} from "react";
+import {StyleSheet, Alert, ScrollView, RefreshControl} from "react-native";
 import * as Location from "expo-location";
 import axios from "axios";
-import Loading from "../Screen/Loading";
-import Home from "../Screen/Home";
+import Loading from "../../Screen/Loading";
+import Home from "../../Screen/Home";
 
 const API_KEY = "1eaa85bc3b419d87b8faa16def8c886e";
 
@@ -33,8 +33,8 @@ export default function Data() {
   const [yesterdayData, setYesterday] = useState(null);
 
   const getWeather = async (latitude, longitude) => {
-    const date = { today: null, yesterday: null };
-    const { data } = await axios.get(
+    const date = {today: null, yesterday: null};
+    const {data} = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
     // console.log(data);
@@ -42,7 +42,7 @@ export default function Data() {
     date.today = Math.round(new Date().getTime() / 1000.0);
     date.yesterday = date.today - 86400;
     const {
-      data: { current },
+      data: {current},
     } = await axios.get(
       `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${latitude}&lon=${longitude}&dt=${date.yesterday}&appid=${API_KEY}&units=metric`
     );

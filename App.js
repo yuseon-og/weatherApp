@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import React, { useState, useEffect } from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import React, {useState, useEffect} from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -9,17 +9,16 @@ import {
   ScrollView,
   RefreshControl,
 } from "react-native";
-import HomeController from "./Controller/HomeController";
-import ForecastHourController from "./Controller/ForecastHourController";
+
 import * as Location from "expo-location";
 import axios from "axios";
 import UserContextProvider from "./context";
-import { findImage } from "./Controller/WeatherDesign";
+import {findImage} from "./Controller/WeatherDesign";
 
-import HomeController1 from "./Screen/Home";
-import ForecastHourController1 from "./Screen/View/WeatherView";
+import HomeController from "./Screen/Home";
+import DayController from "./Screen/ForecastDay";
 import Loading from "./Screen/Loading";
-import Ionicons from "react-native-vector-icons/Ionicons";
+// import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -58,8 +57,8 @@ export default function App() {
   const [longitude, setLongitude] = useState(null);
 
   const getWeather = async (lat, long) => {
-    const { data } = await axios.get(
-      `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric&lang=kr`
+    const {data} = await axios.get(
+      `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
     );
 
     // console.log("여기?");
@@ -73,10 +72,10 @@ export default function App() {
       const yesterday1 = data.current.dt - 86400;
       const yesterday2 = data.current.dt;
       const yesterdayData1 = await axios.get(
-        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric&lang=kr`
+        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric`
       );
       const yesterdayData2 = await axios.get(
-        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday2}&appid=${API_KEY}&units=metric&lang=kr`
+        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday2}&appid=${API_KEY}&units=metric`
       );
 
       setYesterday(yesterdayData1.data);
@@ -84,7 +83,7 @@ export default function App() {
     } else {
       const yesterday1 = data.current.dt - 86400;
       const yesterdayData1 = await axios.get(
-        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric&lang=kr`
+        `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric`
       );
       // console.log(yesterdayData1);
 
@@ -172,7 +171,7 @@ export default function App() {
         <NavigationContainer>
           <ImageBackground source={image} style={styles.image}>
             <Tab.Navigator
-              sceneContainerStyle={{ backgroundColor: "transparent" }}
+              sceneContainerStyle={{backgroundColor: "transparent"}}
               tabBarOptions={{
                 activeTintColor: "rgba(235, 77, 75,1.0)",
                 inactiveTintColor: "gray",
@@ -183,13 +182,13 @@ export default function App() {
             >
               <Tab.Screen
                 name="Home"
-                component={HomeController1}
-                options={{ tabBarLabel: "오늘의 날씨" }}
+                component={HomeController}
+                options={{tabBarLabel: "오늘의 날씨"}}
               />
               <Tab.Screen
-                name="ForecastHour"
-                component={ForecastHourController1}
-                options={{ tabBarLabel: "이번주 날씨" }}
+                name="ForecastDay"
+                component={DayController}
+                options={{tabBarLabel: "이번주 날씨"}}
               />
             </Tab.Navigator>
           </ImageBackground>
@@ -209,7 +208,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export { weatherD, yesterdayD, dayBeforeD };
+export {weatherD, yesterdayD, dayBeforeD};
 {
   /* <NavigationContainer>
   <ImageBackground source={image} style={styles.image}>

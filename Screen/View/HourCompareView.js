@@ -18,7 +18,7 @@ export default function Forecast({
   let month = date.getMonth() + 1;
   let day = date.getDate();
   let hours = date.getHours();
-  let mins = date.getMinutes();
+
   //   console.log(month);
   //   console.log(day);
   //   console.log(hours);
@@ -59,12 +59,12 @@ export default function Forecast({
                 style={{width: 70, height: 70}}
               />
             </View>
-            <View style={styles.innerBox}>
+            <View style={styles.iconInnerBox}>
               <Text style={styles.textDT}>{weather}</Text>
             </View>
           </View>
           <View style={styles.weatherBoxNow}>
-            <View style={styles.iconBox}>
+            <View style={styles.tempBox}>
               <Text style={styles.textTemp}>{todayTemp} º</Text>
             </View>
             <View style={styles.innerBox}>
@@ -90,67 +90,6 @@ export default function Forecast({
             <Text style={styles.textDT}>{pop} %</Text>
           </View>
         </View>
-        {/* <View style={styles.weatherBox}>
-          <View style={styles.weatherBoxInner}>
-            <View style={styles.textBox}>
-              <Text style={styles.textMain}>
-                {month} / {day}
-                {hours >= 12
-                  ? `  오후 ${hours - 12}`
-                  : `  오전 ${hours}`} : {mins < 10 ? `0${mins}` : mins}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.weatherBoxInner}>
-            <Text style={styles.textMain}>{`${todayTemp} º`}</Text>
-          </View>
-          <View style={styles.weatherBoxInner}>
-            <MaterialCommunityIcons
-              name={weatherOption[weather].icon}
-              size={55}
-              color="white"
-            />
-          </View>
-        </View>
-
-        <View style={styles.weatherBox}>
-          <View style={styles.weatherBoxInner2}>
-            <Text style={styles.textMain}>
-              어제
-              {compareTemp === 0
-                ? `와 체감온도가 같아요`
-                : compareTemp < 0
-                ? `보다 체감온도가 ${-compareTemp} º 낮아요`
-                : `보다 체감온도가 ${compareTemp} º 높아요`}
-            </Text>
-          </View>
-
-          비교온도가 높냐 낮냐 보여주는 박스
-          <View style={styles.weatherBoxInner3}>
-            {compareTemp === 0 ? (
-              <FontAwesome5
-                style={styles.icon}
-                name="equals"
-                size={40}
-                color="white"
-              />
-            ) : compareTemp < 0 ? (
-              <MaterialCommunityIcons
-                style={styles.icon}
-                name="arrow-down-bold-box"
-                size={40}
-                color="blue"
-              />
-            ) : (
-              <MaterialCommunityIcons
-                style={styles.icon}
-                name="arrow-up-bold-box"
-                size={40}
-                color="red"
-              />
-            )}
-          </View>
-        </View> */}
       </View>
     </>
   );
@@ -211,7 +150,35 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderColor: "blue",
   },
+
   iconBox: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
+    width: "72%",
+    // height: "65%",
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: "transparent",
+    shadowColor: "black",
+    elevation: 0,
+    // marginTop: 12,
+    backgroundColor: "rgba(255, 255, 255,0.5)",
+
+    // borderWidth: 1,
+    // borderColor: "green",
+  },
+  iconInnerBox: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
+    // borderWidth: 1,
+    // borderColor: "grey",
+  },
+
+  tempBox: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

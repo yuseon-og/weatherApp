@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image} from "react-native";
 
 import {UserContext} from "../context";
 import ForecastHour from "./ForecastHour";
+
 export default function Weather() {
   const context = useContext(UserContext);
   // console.log("이건 컨텍스트");
@@ -37,6 +38,7 @@ export default function Weather() {
               style={{width: 100, height: 100}}
             />
           </View>
+
           <View style={styles.condiContainer}>
             <Text style={styles.condition}>
               {weatherD.current.weather[0].main}
@@ -186,21 +188,25 @@ const styles = StyleSheet.create({
   },
   tempandhumi: {
     color: "rgba(255, 255, 255, 1);",
+    // color: "rgba(10, 10, 10, 1);",
     fontSize: 40,
     fontWeight: "400",
   },
   compare: {
     color: "rgba(255, 255, 255, 1);",
+    // color: "rgba(10, 10, 10, 1);",
     fontSize: 20,
     fontWeight: "400",
   },
   condition: {
     color: "rgba(255, 255, 255, 1);",
+    // color: "rgba(10, 10, 10, 1);",
     fontSize: 20,
     fontWeight: "500",
   },
   subTitle: {
     color: "rgba(255, 255, 255, 1);",
+    // color: "rgba(10, 10, 10, 1);",
     fontSize: 23,
     fontWeight: "500",
     paddingTop: 5,
@@ -211,7 +217,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(80, 80, 80,0.6)",
+    // backgroundColor: "rgba(80, 80, 80,0.6)",
+    backgroundColor: "rgba(10, 10, 10,0.6)",
     borderRadius: 15,
     marginTop: 30,
     marginBottom: 20,
@@ -240,11 +247,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // width: "50%",
-    // height: "50%",
 
-    // borderWidth: 2,
+    width: "60%",
+    height: "50%",
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: "transparent",
     // borderColor: "green",
+    shadowColor: "black",
+    elevation: 0,
+
+    marginTop: 12,
+
+    backgroundColor: "rgba(255, 255, 255,0.5)",
 
     // padding: 5,
     // paddingBottom: 5,
@@ -254,10 +269,11 @@ const styles = StyleSheet.create({
   },
   leftCon: {
     flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
 
     // borderWidth: 2,
     // borderColor: "yellow",
-
     // paddingBottom: 23.2,
     // paddingTop: 23.2,
     // paddingLeft: 5,
@@ -304,7 +320,8 @@ const styles = StyleSheet.create({
     flex: 3,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(80, 80, 80,0.6)",
+    backgroundColor: "rgba(10, 10, 10,0.6)",
+    // backgroundColor: "rgba(80, 80, 80,0.6)",
     borderRadius: 15,
     marginTop: 25,
     marginBottom: 30,

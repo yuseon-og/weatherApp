@@ -1,13 +1,13 @@
 import React, {useContext} from "react";
 import {StyleSheet, ScrollView} from "react-native";
-import CompareView from "./View/CompareView";
-import ContentView from "./View/ContentView";
+import HourCompareView from "./View/HourCompareView";
+import HourContentView from "./View/HourContentView";
 import {UserContext} from "../context";
 
 export default function Forecast() {
   const context = useContext(UserContext);
   // console.log("이건 컨텍스트");
-  // console.log(context);
+  console.log(context);
 
   const weatherD = context.weatherD;
   const yesterdayD = context.yesterdayD;
@@ -89,7 +89,7 @@ export default function Forecast() {
 
   const compareData = finalArray.map((element) => {
     return (
-      <CompareView
+      <HourCompareView
         key={element.dt}
         time={element.dt}
         weather={element.weather}
@@ -102,65 +102,10 @@ export default function Forecast() {
     );
   });
 
-  // const compareData = newObject.map((element) => {
-  //   return (
-  //     <CompareView
-  //       key={element.dt}
-  //       time={element.dt}
-  //       weather={element.weather}
-  //       icon={element.icon}
-  //       todayTemp={element.todayTemp}
-  //       yesterDayTemp={element.yesterdayTemp}
-  //       pop={element.pop}
-  //       style={styles.container}
-  //     />
-  //   );
-  // });
-
-  // const compareData = newObject.forEach(function (element) {
-  //   if (element < 13) {
-  //     return (
-  //       <CompareView
-  //         key={element.dt}
-  //         time={element.dt}
-  //         weather={element.weather}
-  //         icon={element.icon}
-  //         todayTemp={element.todayTemp}
-  //         yesterDayTemp={element.yesterdayTemp}
-  //         pop={element.pop}
-  //         style={styles.container}
-  //       />
-  //     );
-  //   }
-  // });
-
-  // const compareData = () => {
-  //   for (let i = 0; i < 13; i++) {
-  //     return (
-  //       <CompareView
-  //         key={newObject[i].dt}
-  //         time={newObject[i].dt}
-  //         weather={newObject[i].weather}
-  //         icon={newObject[i].icon}
-  //         todayTemp={newObject[i].todayTemp}
-  //         yesterDayTemp={newObject[i].yesterdayTemp}
-  //         pop={newObject[i].pop}
-  //         style={styles.container}
-  //       />
-  //     );
-  //   }
-  // };
-
   return (
     <>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
-        {/* <CompareView
-          time={today.current.dt}
-          weather={today.current.weather[0].main}
-          todayTemp={today.current.feels_like}
-          yesterDayTemp={yesterday.current.feels_like}
-        /> */}
-        <ContentView />
+        <HourContentView />
         {compareData}
       </ScrollView>
     </>
