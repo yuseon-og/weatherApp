@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import {NavigationContainer} from "@react-navigation/native";
-import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import React, {useState, useEffect} from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -13,7 +13,7 @@ import {
 import * as Location from "expo-location";
 import axios from "axios";
 import UserContextProvider from "./context";
-import {findImage} from "./Controller/WeatherDesign";
+import { findImage } from "./Screen/View/WeatherDesign";
 
 import HomeController from "./Screen/Home";
 import DayController from "./Screen/ForecastDay";
@@ -57,7 +57,7 @@ export default function App() {
   const [longitude, setLongitude] = useState(null);
 
   const getWeather = async (lat, long) => {
-    const {data} = await axios.get(
+    const { data } = await axios.get(
       `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
     );
 
@@ -171,24 +171,26 @@ export default function App() {
         <NavigationContainer>
           <ImageBackground source={image} style={styles.image}>
             <Tab.Navigator
-              sceneContainerStyle={{backgroundColor: "transparent"}}
+              sceneContainerStyle={{ backgroundColor: "transparent" }}
               tabBarOptions={{
                 activeTintColor: "rgba(235, 77, 75,1.0)",
                 inactiveTintColor: "gray",
                 showLabel: true,
                 showIcon: true,
+                labelStyle: styles.labelStyle,
+                tabStyle: styles.tabStyle,
               }}
-              // tabBarPosition="bottom"
+              tabBarPosition={"bottom"}
             >
               <Tab.Screen
                 name="Home"
                 component={HomeController}
-                options={{tabBarLabel: "오늘의 날씨"}}
+                options={{ tabBarLabel: "오늘의 날씨" }}
               />
               <Tab.Screen
                 name="ForecastDay"
                 component={DayController}
-                options={{tabBarLabel: "이번주 날씨"}}
+                options={{ tabBarLabel: "이번주 날씨" }}
               />
             </Tab.Navigator>
           </ImageBackground>
@@ -206,41 +208,14 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  tabStyle: {
+    backgroundColor: "#rgba(5, 5, 5,0.1)",
+
+    // display: "none",
+  },
+  labelStyle: {
+    fontSize: 15,
+  },
 });
 
-export {weatherD, yesterdayD, dayBeforeD};
-{
-  /* <NavigationContainer>
-  <ImageBackground source={image} style={styles.image}>
-    <Tab.Navigator sceneContainerStyle={{ backgroundColor: "transparent" }}>
-      <Tab.Screen name="Home" component={HomeController} />
-      <Tab.Screen name="ForecastHour" component={ForecastHourController} />
-    </Tab.Navigator>
-  </ImageBackground>
-</NavigationContainer>; */
-}
-
-// 네비게이터에 디자인 줄때
-
-// <Tab.Navigator
-// screenOptions={({ route }) => ({
-//   tabBarIcon: ({ focused, color, size }) => {
-//     let iconName;
-
-//     if (route.name === "Home") {
-//       iconName = focused ? "cloud" : "cloud-outline";
-//     }
-
-//     else if (route.name === "ForecastHour") {
-//       iconName = focused ? "analytics" : "analytics-outline";
-//     }
-
-//     return <Ionicons name={iconName} size={size} color={color} />;
-//   },
-// })}
-// tabBarOptions={{
-//   activeTintColor: "#0083B0",
-//   inactiveTintColor: "gray",
-//   showLabel: false,
-// }}
-// >
+export { weatherD, yesterdayD, dayBeforeD };

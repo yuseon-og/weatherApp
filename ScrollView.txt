@@ -60,3 +60,23 @@ export 하는 함수 내부에
 1625602548
 1625652526
 1625654485
+
+// "splash": {
+    //   "image": "./assets/splash.png",
+    //   "resizeMode": "contain",
+    //   "backgroundColor": "#ffffff"
+    // },
+    // "updates": {
+    //   "fallbackToCacheTimeout": 0
+    // },
+    // "assetBundlePatterns": [
+    //   "**/*"
+    // ],
+    // "ios": {
+    //   "supportsTablet": true
+    // },
+
+     "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },

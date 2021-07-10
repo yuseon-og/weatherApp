@@ -1,13 +1,13 @@
-import React, {useContext} from "react";
-import {StyleSheet, ScrollView} from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, ScrollView, View } from "react-native";
 import HourCompareView from "./View/HourCompareView";
 import HourContentView from "./View/HourContentView";
-import {UserContext} from "../context";
+import { UserContext } from "../context";
 
 export default function Forecast() {
   const context = useContext(UserContext);
   // console.log("이건 컨텍스트");
-  console.log(context);
+  // console.log(context);
 
   const weatherD = context.weatherD;
   const yesterdayD = context.yesterdayD;
@@ -74,8 +74,13 @@ export default function Forecast() {
 
   // 12개 까지만 넣기 위해서....
   let finalArray = [];
+  // let i = 0;
+  // while (newObject[i] != undefined && i < 12) {
+  //   i++;
+  //   finalArray.push(newObject[i]);
+  // }
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < newObject.length; i++) {
     finalArray.push(newObject[i]);
   }
 
@@ -85,6 +90,7 @@ export default function Forecast() {
 
   // console.log(`새로운 오브젝트 ${newObject}`);
   // console.log(newObject);
+  // console.log("-----------");
   // console.log(finalArray);
 
   const compareData = finalArray.map((element) => {
@@ -104,21 +110,22 @@ export default function Forecast() {
 
   return (
     <>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
+      <View style={styles.container}>
         <HourContentView />
-        {compareData}
-      </ScrollView>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
+          {compareData}
+        </ScrollView>
+      </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "row",
   },
-  scrollView: {
-    flex: 1,
-  },
+
   image: {
     flex: 1,
     resizeMode: "cover",

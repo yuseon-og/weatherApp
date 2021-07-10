@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, View, ScrollView, Image} from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 
 export default function Forecast({
   time,
@@ -56,7 +56,7 @@ export default function Forecast({
                 source={{
                   uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
                 }}
-                style={{width: 70, height: 70}}
+                style={{ width: 70, height: 70 }}
               />
             </View>
             <View style={styles.iconInnerBox}>
@@ -96,15 +96,18 @@ export default function Forecast({
 }
 const styles = StyleSheet.create({
   box_container_cold: {
-    width: "8%",
+    flex: 1,
+    // width: "8%",
     backgroundColor: "rgba(5, 30, 80,0.5)",
   },
   box_container_warm: {
-    width: "8%",
+    flex: 1,
+    // width: "8%",
     backgroundColor: "rgba(80, 40, 50,0.5)",
   },
   box_container_same: {
-    width: "8%",
+    flex: 1,
+    // width: "8%",
     backgroundColor: "rgba(50, 80, 80,0.5)",
   },
   weatherBox: {
@@ -225,8 +228,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "300",
   },
-  textSmall: {fontSize: 10, color: "white", fontWeight: "400"},
-  textCompare: {fontSize: 15, color: "white", fontWeight: "400"},
+  textSmall: { fontSize: 10, color: "white", fontWeight: "400" },
+  textCompare: { fontSize: 15, color: "white", fontWeight: "400" },
   textPo: {
     fontSize: 20,
     color: "white",

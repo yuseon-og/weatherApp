@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
-import {View, Text, StyleSheet, Image} from "react-native";
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 
-import {UserContext} from "../context";
+import { UserContext } from "../context";
 import ForecastHour from "./ForecastHour";
 
 export default function Weather() {
@@ -35,7 +35,7 @@ export default function Weather() {
               source={{
                 uri: `http://openweathermap.org/img/wn/${weatherD.current.weather[0].icon}@2x.png`,
               }}
-              style={{width: 100, height: 100}}
+              style={{ width: 100, height: 100 }}
             />
           </View>
 
@@ -58,12 +58,12 @@ export default function Weather() {
                   style={
                     (styles.tempandhumi,
                     {
-                      fontSize: 10,
+                      fontSize: 15,
                       marginRight: 10,
                     })
                   }
                 >
-                  {"습도    "}
+                  {"습도 "}
                 </Text>
                 {weatherD.current.humidity} %
               </Text>
@@ -76,7 +76,7 @@ export default function Weather() {
               ) : tempGap > 0 ? (
                 <View style={styles.insider}>
                   <Text
-                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
+                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
                   >
                     {" "}
                     어제보다
@@ -86,7 +86,7 @@ export default function Weather() {
               ) : (
                 <View style={styles.insider}>
                   <Text
-                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
+                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
                   >
                     {" "}
                     어제보다
@@ -101,7 +101,7 @@ export default function Weather() {
               ) : humidGap > 0 ? (
                 <View style={styles.insider}>
                   <Text
-                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
+                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
                   >
                     어제보다
                   </Text>
@@ -110,7 +110,7 @@ export default function Weather() {
               ) : (
                 <View style={styles.insider}>
                   <Text
-                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
+                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
                   >
                     {" "}
                     어제보다
@@ -132,55 +132,10 @@ export default function Weather() {
         <View style={styles.vertical2}>
           <ForecastHour />
         </View>
-
-        {/* <MaterialCommunityIcons
-          name={weatherOption[today.weather[0].main].icon}
-          size={96}
-          color="white"
-        />
-        <Text style={styles.condition}>
-          {today.weather[0].main} /{" "}
-          <Text style={styles.temp}>{Math.round(today.main.temp)}º / </Text>
-          <Text style={styles.humidity}>{today.main.humidity}%</Text>
-        </Text>
-      </View>
-      <View style={styles.halfContainer2}>
-        <View style={[styles.halfContainer, styles.textContainer]}>
-          <Text style={styles.yesterday}>
-            어제는 /{" "}
-            <Text style={styles.yesterday}>
-              {Math.round(yesterday.temp)}º /{" "}
-            </Text>
-            <Text style={styles.yesterday}>{yesterday.humidity}%</Text>
-          </Text>
-          <Text style={styles.tempDscription}>
-            온도가{" "}
-            {tempGap === 0
-              ? "어제와 같아요"
-              : tempGap > 0
-              ? `어제보다 ${tempGap}도 높아요`
-              : `어제보다 ${tempGap}도 낮아요`}
-          </Text>
-          <Text style={styles.humidityDscription}>
-            습도가{" "}
-            {humidGap === 0
-              ? "어제와 같아요"
-              : humidGap > 0
-              ? `어제보다 ${humidGap}% 높아요`
-              : `어제보다 ${-humidGap}% 낮아요`}
-          </Text>
-        </View> */}
-        {/* </View> */}
       </View>
     </View>
   );
 }
-
-Weather.propTypes = {
-  // today: PropTypes.object.isRequired,
-  // yesterday: PropTypes.object.isRequired,
-  // condition : PropTypes.oneOf(["Thunderstorm","Drizzle","Rain","Snow","Mist","Smoke","Haze","Dust","Fog","Sand","Dust","Ash","Squall","Tornado","Clear","Clouds"]).isRequired
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -189,7 +144,7 @@ const styles = StyleSheet.create({
   tempandhumi: {
     color: "rgba(255, 255, 255, 1);",
     // color: "rgba(10, 10, 10, 1);",
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "400",
   },
   compare: {
@@ -218,7 +173,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     // backgroundColor: "rgba(80, 80, 80,0.6)",
-    backgroundColor: "rgba(10, 10, 10,0.6)",
+    backgroundColor: "rgba(10, 10, 10,0.5)",
     borderRadius: 15,
     marginTop: 30,
     marginBottom: 20,
@@ -271,37 +226,15 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "center",
     alignItems: "center",
-
-    // borderWidth: 2,
-    // borderColor: "yellow",
-    // paddingBottom: 23.2,
-    // paddingTop: 23.2,
-    // paddingLeft: 5,
-    // paddingRight: 5,
   },
   RightCon: {
     flex: 4,
-
-    // borderWidth: 2,
-    // borderColor: "yellow",
-
-    // paddingBottom: 23.2,
-    // paddingTop: 23.2,
-    // paddingLeft: 5,
-    // paddingRight: 5,
   },
   discription: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-
-    // paddingBottom: 6,
-    // paddingTop: 6,
-    // paddingLeft: 5,
-    // paddingRight: 5,
-    // borderWidth: 2,
-    // borderColor: "red",
   },
 
   insider: {
@@ -310,18 +243,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 4.5,
     paddingTop: 4.5,
-
-    // paddingLeft: 5,
-    // paddingRight: 5,
-    // borderWidth: 2,
-    // borderColor: "blue",
   },
   halfContainer2: {
     flex: 3,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(10, 10, 10,0.6)",
-    // backgroundColor: "rgba(80, 80, 80,0.6)",
+    backgroundColor: "rgba(10, 10, 10,0.5)",
+
     borderRadius: 15,
     marginTop: 25,
     marginBottom: 30,
@@ -333,9 +261,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 15,
     paddingRight: 5,
-
-    // borderWidth: 1,
-    // borderColor: "red",
   },
   vertical2: {
     width: "100%",

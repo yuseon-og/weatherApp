@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Forecast() {
   return (
@@ -30,15 +30,12 @@ export default function Forecast() {
 }
 const styles = StyleSheet.create({
   container: {
-    width: "4%",
-
-    backgroundColor: "rgba(80, 80, 80,0.5)",
+    width: "10%",
+    backgroundColor: "rgba(10, 10, 10,0.1)",
   },
 
   weatherBox: {
     flex: 3,
-    // borderWidth: 1,
-    // borderColor: "black",
   },
   weatherBoxDT: {
     flex: 0.5,
@@ -49,9 +46,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
     borderBottomLeftRadius: 5,
     borderColor: "rgba(127, 143, 166,0.5)",
-
-    // borderWidth: 1,
-    // borderColor: "yellow",
   },
 
   weatherBoxNow: {
@@ -67,10 +61,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
     borderBottomLeftRadius: 5,
     borderColor: "rgba(127, 143, 166,0.5)",
-
-    // borderRadius: 15,
-    // borderWidth: 1,
-    // borderColor: "blue",
   },
 
   weatherBoxPop: {
@@ -82,10 +72,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 1.5,
     paddingRight: 1.5,
-    // borderRadius: 15,
-
-    // borderWidth: 1,
-    // borderColor: "yellow",
   },
 
   textBox: {

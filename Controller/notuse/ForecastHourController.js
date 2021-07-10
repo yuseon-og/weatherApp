@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import * as Location from "expo-location";
 import axios from "axios";
-import LoadingBetween from "./notuse/LoadingBetween";
-import ForecastHour from "../Screen/ForecastHour";
+import LoadingBetween from "./LoadingBetween";
+import ForecastHour from "../../Screen/ForecastHour";
 
 const ADDRESS = "https://api.openweathermap.org/data/2.5/";
 
@@ -43,7 +43,7 @@ export default function HourlyCompare() {
   const [hourArray, setHourArray] = useState(null);
 
   const getWeather = async (latitude, longitude) => {
-    const {data} = await axios.get(
+    const { data } = await axios.get(
       `${ADDRESS}${API}?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
     sethourForecast(data);
