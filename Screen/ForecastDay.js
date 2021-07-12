@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import React, {useContext} from "react";
+import {StyleSheet, View, ScrollView} from "react-native";
 import DayCompareView from "./View/DayCompareView";
 import DayContentView from "./View/DayContentView";
-import { UserContext } from "../context";
+import {UserContext} from "../context";
 
-////////// 그냥 props 넘겨서 스크린 보여주는게 좋을 것 같다//////////////////
 export default function ForecastDay() {
   const context = useContext(UserContext);
-  // console.log("이건 컨텍스트");
-  // console.log(context);
+
   const weatherD = context.weatherD.daily;
 
   const dailyData = weatherD.map((element) => {
@@ -51,9 +49,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginLeft: 10,
     marginRight: 5,
-
-    // borderWidth: 1,
-    // borderColor: "pink",
   },
 
   compareView: {
@@ -62,9 +57,6 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
     margin: 2,
-    // backgroundColor: "rgba(10, 10, 10,0.6)",
-    borderWidth: 2,
-    borderColor: "yellow",
   },
   image: {
     flex: 1,

@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import React, { useState, useEffect } from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import React, {useState, useEffect} from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -13,12 +13,11 @@ import {
 import * as Location from "expo-location";
 import axios from "axios";
 import UserContextProvider from "./context";
-import { findImage } from "./Screen/View/WeatherDesign";
+import {findImage} from "./Screen/View/WeatherDesign";
 
 import HomeController from "./Screen/Home";
 import DayController from "./Screen/ForecastDay";
 import Loading from "./Screen/Loading";
-// import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -53,16 +52,12 @@ export default function App() {
   const [weatherData, setData] = useState(null);
   const [yesterdayData, setYesterday] = useState(null);
   const [dayBeforeData, setdayBeforeData] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
 
   const getWeather = async (lat, long) => {
-    const { data } = await axios.get(
+    const {data} = await axios.get(
       `${ADDRESS}${API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
     );
 
-    // console.log("여기?");
-    // console.log(data);
     setData(data);
 
     let time = new Date(data.current.dt * 1000);
@@ -85,7 +80,6 @@ export default function App() {
       const yesterdayData1 = await axios.get(
         `${ADDRESS}${API}/timemachine?lat=${lat}&lon=${long}&dt=${yesterday1}&appid=${API_KEY}&units=metric`
       );
-      // console.log(yesterdayData1);
 
       setYesterday(yesterdayData1.data);
       setdayBeforeData([]);
@@ -98,11 +92,7 @@ export default function App() {
       const lat = location.coords.latitude;
       const long = location.coords.longitude;
 
-      setLatitude(lat);
-      setLongitude(long);
-
       getWeather(lat, long);
-      // setIsLoading(true);
     } catch (error) {
       Alert.alert("Donno where you are, Can't find you....");
     }
@@ -171,9 +161,9 @@ export default function App() {
         <NavigationContainer>
           <ImageBackground source={image} style={styles.image}>
             <Tab.Navigator
-              sceneContainerStyle={{ backgroundColor: "transparent" }}
+              sceneContainerStyle={{backgroundColor: "transparent"}}
               tabBarOptions={{
-                activeTintColor: "rgba(235, 77, 75,1.0)",
+                activeTintColor: "rgba(14, 76, 114,1.0)",
                 inactiveTintColor: "gray",
                 showLabel: true,
                 showIcon: true,
@@ -185,12 +175,12 @@ export default function App() {
               <Tab.Screen
                 name="Home"
                 component={HomeController}
-                options={{ tabBarLabel: "오늘의 날씨" }}
+                options={{tabBarLabel: "오늘의 날씨"}}
               />
               <Tab.Screen
                 name="ForecastDay"
                 component={DayController}
-                options={{ tabBarLabel: "이번주 날씨" }}
+                options={{tabBarLabel: "이번주 날씨"}}
               />
             </Tab.Navigator>
           </ImageBackground>
@@ -209,8 +199,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabStyle: {
-    backgroundColor: "#rgba(5, 5, 5,0.1)",
-
+    // backgroundColor: "#rgba(1, 1, 1,0.7)",
     // display: "none",
   },
   labelStyle: {
@@ -218,4 +207,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { weatherD, yesterdayD, dayBeforeD };
+export {weatherD, yesterdayD, dayBeforeD};

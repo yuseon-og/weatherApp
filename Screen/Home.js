@@ -1,29 +1,23 @@
-import React, { useContext } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, {useContext} from "react";
+import {View, Text, StyleSheet, Image} from "react-native";
 
-import { UserContext } from "../context";
+import {UserContext} from "../context";
 import ForecastHour from "./ForecastHour";
 
 export default function Weather() {
   const context = useContext(UserContext);
-  // console.log("이건 컨텍스트");
-  // console.log(context);
 
-  // console.log(context);
   const weatherD = context.weatherD;
   const yesterdayD = context.yesterdayD;
-  // const dayBeforeD = context.dayBeforeD;
 
   const icon =
     "uri:`http://openweathermap.org/img/wn/${weatherD.current.weather[0].icon}@2x.png`";
-  // console.log(yesterdayD.current);
 
   const tempGap = Math.round(weatherD.current.temp - yesterdayD.current.temp);
-  // console.log(tempGap);
+
   const humidGap = Math.round(
     weatherD.current.humidity - yesterdayD.current.humidity
   );
-  // console.log(humidGap);
 
   return (
     <View style={styles.container}>
@@ -35,7 +29,7 @@ export default function Weather() {
               source={{
                 uri: `http://openweathermap.org/img/wn/${weatherD.current.weather[0].icon}@2x.png`,
               }}
-              style={{ width: 100, height: 100 }}
+              style={{width: 100, height: 100}}
             />
           </View>
 
@@ -76,7 +70,7 @@ export default function Weather() {
               ) : tempGap > 0 ? (
                 <View style={styles.insider}>
                   <Text
-                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
+                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
                   >
                     {" "}
                     어제보다
@@ -86,7 +80,7 @@ export default function Weather() {
               ) : (
                 <View style={styles.insider}>
                   <Text
-                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
+                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
                   >
                     {" "}
                     어제보다
@@ -101,7 +95,7 @@ export default function Weather() {
               ) : humidGap > 0 ? (
                 <View style={styles.insider}>
                   <Text
-                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
+                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
                   >
                     어제보다
                   </Text>
@@ -110,7 +104,7 @@ export default function Weather() {
               ) : (
                 <View style={styles.insider}>
                   <Text
-                    style={{ fontSize: 10, color: "rgba(255, 255, 255, 1);" }}
+                    style={{fontSize: 10, color: "rgba(255, 255, 255, 1);"}}
                   >
                     {" "}
                     어제보다
@@ -143,25 +137,25 @@ const styles = StyleSheet.create({
   },
   tempandhumi: {
     color: "rgba(255, 255, 255, 1);",
-    // color: "rgba(10, 10, 10, 1);",
+
     fontSize: 30,
     fontWeight: "400",
   },
   compare: {
     color: "rgba(255, 255, 255, 1);",
-    // color: "rgba(10, 10, 10, 1);",
+
     fontSize: 20,
     fontWeight: "400",
   },
   condition: {
     color: "rgba(255, 255, 255, 1);",
-    // color: "rgba(10, 10, 10, 1);",
+
     fontSize: 20,
     fontWeight: "500",
   },
   subTitle: {
     color: "rgba(255, 255, 255, 1);",
-    // color: "rgba(10, 10, 10, 1);",
+
     fontSize: 23,
     fontWeight: "500",
     paddingTop: 5,
@@ -172,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "rgba(80, 80, 80,0.6)",
+
     backgroundColor: "rgba(10, 10, 10,0.5)",
     borderRadius: 15,
     marginTop: 30,
@@ -180,9 +174,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     paddingBottom: 20,
-    // paddingTop: 10,
-    // paddingLeft: 5,
-    // paddingRight: 5,
   },
   condiContainer: {
     flex: 1,
@@ -190,13 +181,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 5,
     paddingRight: 5,
-
-    // borderWidth: 2,
-    // borderColor: "grey",
-    // width: "50%",
-    // height: "50%",
-    // paddingBottom: 5,
-    // paddingTop: 5,
   },
   imageContainer: {
     flex: 1,
@@ -215,12 +199,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
 
     backgroundColor: "rgba(255, 255, 255,0.5)",
-
-    // padding: 5,
-    // paddingBottom: 5,
-    // paddingTop: 10,
-    // paddingLeft: 5,
-    // paddingRight: 5,
   },
   leftCon: {
     flex: 2,
@@ -266,9 +244,5 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 10,
     paddingRight: 5,
-    // paddingLeft: 5,
-
-    // borderWidth: 1,
-    // borderColor: "blue",
   },
 });

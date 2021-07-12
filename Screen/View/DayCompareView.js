@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import {StyleSheet, Text, View, ScrollView, Image} from "react-native";
 
 export default function Forecast({
   time,
@@ -70,7 +70,7 @@ export default function Forecast({
                 source={{
                   uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
                 }}
-                style={{ width: 50, height: 50 }}
+                style={{width: 50, height: 50}}
               />
             </View>
             <View style={styles.iconInnerBox}>
@@ -137,8 +137,69 @@ export default function Forecast({
               {rain == null ? `-` : `${rain} mm`}
             </Text>
           </View>
-          <View style={styles.otherBox}>
-            <Text style={styles.textother}>{uvi}</Text>
+          <View style={styles.otherBox1}>
+            {uvi <= 2 ? (
+              <View style={styles.uviContainer}>
+                <View
+                  style={[
+                    styles.uviBox,
+                    {backgroundColor: "rgba(239, 243, 255,0.5)"},
+                  ]}
+                ></View>
+
+                <Text style={styles.textother}>낮음</Text>
+              </View>
+            ) : uvi <= 5 ? (
+              <View style={styles.uviContainer}>
+                <View
+                  style={[
+                    styles.uviBox,
+                    {backgroundColor: "rgba(254, 217, 142,0.5)"},
+                  ]}
+                ></View>
+                <Text style={styles.textother}>보통</Text>
+              </View>
+            ) : uvi <= 7 ? (
+              <View style={styles.uviContainer}>
+                <View
+                  style={[
+                    styles.uviBox,
+                    {backgroundColor: "rgba(255, 90, 34,0.5)"},
+                  ]}
+                ></View>
+                <Text style={styles.textother}>높음</Text>
+              </View>
+            ) : uvi <= 10 ? (
+              <View style={styles.uviContainer}>
+                <View
+                  style={[
+                    styles.uviBox,
+                    {backgroundColor: "rgba(255, 0, 10,0.5)"},
+                  ]}
+                ></View>
+                <Text style={styles.textother}>매우높음</Text>
+              </View>
+            ) : uvi >= 11 ? (
+              <View style={styles.uviContainer}>
+                <View
+                  style={[
+                    styles.uviBox,
+                    {backgroundColor: "rgba(112, 48, 160,0.5)"},
+                  ]}
+                ></View>
+                <Text style={styles.textother}>위험</Text>
+              </View>
+            ) : (
+              <View style={styles.uviContainer}>
+                <View
+                  style={[
+                    styles.uviBox,
+                    {backgroundColor: "rgba(255, 255, 255,0)"},
+                  ]}
+                ></View>
+                <Text style={styles.textother}>-</Text>
+              </View>
+            )}
           </View>
           <View style={styles.otherBox}>
             <Text style={styles.textother}>{windSpeed} m/s</Text>
@@ -148,7 +209,7 @@ export default function Forecast({
               source={{
                 uri: `http://openweathermap.org/img/wn/01d@2x.png`,
               }}
-              style={{ width: 30, height: 30 }}
+              style={{width: 30, height: 30}}
             />
             <View style={styles.textBox}>
               <Text style={styles.textother}>
@@ -161,7 +222,7 @@ export default function Forecast({
               source={{
                 uri: `http://openweathermap.org/img/wn/01n@2x.png`,
               }}
-              style={{ width: 30, height: 30 }}
+              style={{width: 30, height: 30}}
             />
             <View style={styles.textBox}>
               <Text style={styles.textother}>
@@ -282,10 +343,44 @@ const styles = StyleSheet.create({
     // borderColor: "green",
   },
 
+  otherBox1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
+    width: "100%",
+    // 각 상자마다 아래 테두리만 넣은것
+    borderBottomWidth: 0.8,
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderColor: "rgba(127, 143, 166,0.5)",
+
+    // borderWidth: 1,
+    // borderColor: "green",
+  },
+
   textBox: {
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
+  },
+
+  uviContainer: {
+    width: "50%",
+    height: "25%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 10,
+  },
+
+  uviBox: {
+    width: "80%",
+    height: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+
+    marginBottom: 10,
   },
 
   // 온도부분 경계선 주기

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import React, {useState} from "react";
+import {StyleSheet, Text, View, ImageBackground} from "react-native";
 
 const image = require("../assets/loading.png");
 export default function Loading() {
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingHorizontal: 30,
     paddingVertical: 50,
-    // backgroundColor: "rgba(255, 255, 255,0.4)",
   },
   text: {
     color: "#rgba(10, 10, 10,0.6)",

@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import React, {useContext} from "react";
+import {StyleSheet, ScrollView, View} from "react-native";
 import HourCompareView from "./View/HourCompareView";
 import HourContentView from "./View/HourContentView";
-import { UserContext } from "../context";
+import {UserContext} from "../context";
 
 export default function Forecast() {
   const context = useContext(UserContext);
-  // console.log("이건 컨텍스트");
-  // console.log(context);
 
   const weatherD = context.weatherD;
   const yesterdayD = context.yesterdayD;
@@ -41,18 +39,6 @@ export default function Forecast() {
   const yesterdayHourly = yesterdayArray.filter(function (element) {
     return element.dt >= yesterdayD.current.dt;
   });
-  // console.log(yesterdayHourly);
-
-  // 좀따 삭제
-  // todayHourly.map((element) => {
-  //   yesterdayHourly.map((number) => {
-  //     number.dt + 86400 === element.dt
-  //       ? console.log(
-  //           `element.dt : ${element.dt}, element.weather[0].main : ${element.weather[0].main}, element.feels_like : ${element.feels_like}, number.feels_like : ${number.feels_like} `
-  //         )
-  //       : null;
-  //   });
-  // });
 
   // 오늘 시간데이터 하나하나와 비교하는데 어제 시간데이터 + 86400 === 오늘 시간데이터와 같은거면
   // 새로 배열 만든거에 push로 데이터를 넣어라
@@ -72,26 +58,11 @@ export default function Forecast() {
     });
   });
 
-  // 12개 까지만 넣기 위해서....
   let finalArray = [];
-  // let i = 0;
-  // while (newObject[i] != undefined && i < 12) {
-  //   i++;
-  //   finalArray.push(newObject[i]);
-  // }
 
   for (let i = 0; i < newObject.length; i++) {
     finalArray.push(newObject[i]);
   }
-
-  // const finalArray = newObject.filter((n) => {
-  //   return n < 13;
-  // });
-
-  // console.log(`새로운 오브젝트 ${newObject}`);
-  // console.log(newObject);
-  // console.log("-----------");
-  // console.log(finalArray);
 
   const compareData = finalArray.map((element) => {
     return (
